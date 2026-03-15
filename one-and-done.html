@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One &amp; Done — 2025–26 PGA Tour</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0f1a0f;
+    --bg-mid: #1a2e1a;
+    --green-accent: #8FBF6B;
+    --green-light: #D4E8C2;
+    --green-muted: rgba(143,191,107,0.15);
+    --text-primary: #f0f5ec;
+    --text-dim: rgba(255,255,255,0.3);
+    --text-dimmer: rgba(255,255,255,0.22);
+    --border: rgba(255,255,255,0.06);
+    --card-bg: rgba(255,255,255,0.025);
+    --hover-bg: rgba(255,255,255,0.025);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(170deg, var(--bg-mid) 0%, var(--bg-deep) 40%, #111510 100%);
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Fairway stripes */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,0.005) 0px, rgba(255,255,255,0.005) 50px, transparent 50px, transparent 100px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; padding: 0 16px; }
+
+  /* Header */
+  .header { padding: 36px 0 16px; text-align: center; }
+  .header .season-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em;
+    color: var(--green-accent); margin-bottom: 6px; font-weight: 500;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 800;
+    letter-spacing: -0.02em; color: #fff;
+  }
+  .header .meta { margin-top: 10px; font-size: 13px; color: var(--text-dim); }
+  .header .meta .dot { margin: 0 8px; opacity: 0.3; }
+
+  /* Leader banner */
+  .leader-banner {
+    margin: 8px 0 18px; padding: 18px 22px; border-radius: 14px;
+    background: linear-gradient(135deg, rgba(143,191,107,0.13), rgba(143,191,107,0.03));
+    border: 1px solid rgba(143,191,107,0.18);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .leader-banner .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--green-accent); margin-bottom: 4px; }
+  .leader-banner .name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: #fff; }
+  .leader-banner .amount { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; color: var(--green-light); }
+  .leader-banner .gap { font-size: 12px; color: rgba(255,255,255,0.28); margin-top: 2px; }
+
+  /* This week banner */
+  .this-week {
+    margin: 0 0 18px; padding: 14px 20px; border-radius: 10px;
+    background: rgba(143,191,107,0.08); border: 1px dashed rgba(143,191,107,0.25);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+  }
+  .this-week .tw-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--green-accent); margin-bottom: 2px; font-weight: 600; }
+  .this-week .tw-name { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .this-week .tw-picks { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  .this-week .tw-chip {
+    font-size: 10px; padding: 2px 8px; border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-weight: 500; white-space: nowrap;
+  }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 4px; margin-bottom: 14px; }
+  .tab-btn {
+    flex: 1; padding: 10px 0; border: none; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s;
+    background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.3);
+  }
+  .tab-btn.active { background: rgba(143,191,107,0.16); color: var(--green-light); }
+
+  /* Content area */
+  .content { padding-bottom: 40px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Leaderboard */
+  .leaderboard {
+    background: rgba(255,255,255,0.02); border-radius: 14px;
+    border: 1px solid var(--border); overflow: hidden;
+  }
+  .lb-row {
+    display: flex; align-items: center; padding: 14px 20px;
+    border-bottom: 1px solid var(--border); transition: background 0.15s; cursor: default;
+  }
+  .lb-row:last-child { border-bottom: none; }
+  .lb-row:hover { background: var(--hover-bg); }
+  .lb-rank {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-weight: 700; flex-shrink: 0;
+  }
+  .lb-rank.r1 { background: linear-gradient(135deg, #8FBF6B, #D4E8C2); color: #1a2e1a; font-size: 18px; }
+  .lb-rank.r2, .lb-rank.r3 { background: rgba(143,191,107,0.12); color: rgba(255,255,255,0.45); font-size: 16px; }
+  .lb-rank.rn { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.45); font-size: 16px; }
+  .lb-info { margin-left: 16px; flex: 1; min-width: 0; }
+  .lb-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; }
+  .lb-sub { font-size: 12px; color: rgba(255,255,255,0.28); margin-top: 2px; }
+  .lb-total { font-family: 'DM Mono', monospace; font-size: 17px; font-weight: 500; white-space: nowrap; }
+  .lb-total.first { color: var(--green-light); }
+
+  /* Chart */
+  .chart-container {
+    background: rgba(255,255,255,0.02); border-radius: 14px;
+    border: 1px solid var(--border); padding: 18px 14px 14px;
+  }
+  .chart-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; margin-bottom: 14px; padding-left: 4px; }
+  .chart-svg { width: 100%; display: block; }
+  .chart-legend { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+  .legend-item {
+    display: flex; align-items: center; gap: 6px; font-size: 12px;
+    color: rgba(255,255,255,0.5); cursor: pointer; transition: color 0.2s; padding: 2px 0; user-select: none;
+  }
+  .legend-item:hover, .legend-item.highlighted { color: #fff; }
+  .legend-swatch { width: 14px; height: 3px; border-radius: 2px; }
+
+  /* Pick cards */
+  .pick-cards { display: flex; flex-direction: column; gap: 12px; }
+  .pick-card {
+    background: var(--card-bg); border-radius: 12px;
+    border: 1px solid var(--border); overflow: hidden;
+  }
+  .pick-card.pending { border-color: rgba(143,191,107,0.25); }
+  .pick-card-header {
+    padding: 14px 20px 10px; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .pick-card-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; }
+  .pick-card-week { font-size: 10px; color: var(--text-dimmer); margin-top: 3px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .pick-card-best { font-size: 10px; color: var(--green-accent); text-transform: uppercase; letter-spacing: 0.08em; }
+  .live-badge {
+    font-size: 10px; background: var(--green-muted); color: var(--green-accent);
+    padding: 3px 10px; border-radius: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .pick-row { display: flex; align-items: center; padding: 7px 20px; gap: 10px; }
+  .pick-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .pick-detail { flex: 1; font-size: 13px; color: rgba(255,255,255,0.55); min-width: 0; }
+  .pick-detail .pname { color: var(--text-primary); font-weight: 500; }
+  .pick-detail .arrow { margin: 0 6px; opacity: 0.25; }
+  .pick-finish { font-size: 11px; color: var(--text-dim); min-width: 28px; text-align: right; }
+  .pick-finish.cut { color: rgba(255,100,100,0.5); }
+  .pick-earnings { font-family: 'DM Mono', monospace; font-size: 13px; min-width: 70px; text-align: right; }
+  .pick-earnings.zero { color: rgba(255,255,255,0.18); }
+  .pick-earnings.pos { color: rgba(255,255,255,0.6); }
+
+  /* Used golfers */
+  .used-cards { display: flex; flex-direction: column; gap: 14px; }
+  .used-card {
+    background: var(--card-bg); border-radius: 12px;
+    border: 1px solid var(--border); padding: 14px 20px;
+  }
+  .used-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .used-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .used-name { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; }
+  .used-count { font-size: 11px; color: var(--text-dimmer); margin-left: auto; }
+  .used-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .used-chip {
+    font-size: 11px; padding: 3px 10px; border-radius: 20px;
+    background: rgba(143,191,107,0.1); color: #B8D9A0;
+    border: 1px solid rgba(143,191,107,0.18); font-weight: 500;
+  }
+
+  /* Fade-in animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { animation: fadeUp 0.4s ease both; }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+  <!-- Header -->
+  <div class="header fade-in">
+    <div class="season-label">⛳ 2025–26 PGA Tour Season</div>
+    <h1>One &amp; Done</h1>
+    <div class="meta" id="meta"></div>
+  </div>
+
+  <!-- Leader -->
+  <div class="leader-banner fade-in" style="animation-delay:0.05s" id="leader-banner"></div>
+
+  <!-- This Week -->
+  <div class="this-week fade-in" style="animation-delay:0.1s" id="this-week"></div>
+
+  <!-- Tabs -->
+  <div class="tabs fade-in" style="animation-delay:0.15s">
+    <button class="tab-btn active" data-tab="leaderboard">Standings</button>
+    <button class="tab-btn" data-tab="chart">Earnings</button>
+    <button class="tab-btn" data-tab="history">Picks</button>
+    <button class="tab-btn" data-tab="burned">Used</button>
+  </div>
+
+  <!-- Content -->
+  <div class="content fade-in" style="animation-delay:0.2s">
+    <div class="tab-panel active" id="panel-leaderboard"></div>
+    <div class="tab-panel" id="panel-chart"></div>
+    <div class="tab-panel" id="panel-history"></div>
+    <div class="tab-panel" id="panel-burned"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA — Edit this section after each tournament
+// ============================================================
+const PLAYERS = ["Aaron", "Austin", "Cody", "Jefferson", "Zach"];
+
+const TOURNAMENTS = [
+  {
+    tournament: "Sony Open in Hawaii",
+    picks: {
+      Aaron:     { golfer: "Si Woo Kim",       earnings: 220675,    finish: "T11" },
+      Austin:    { golfer: "Nick Taylor",       earnings: 163041.67, finish: "T13" },
+      Cody:      { golfer: "Ben Griffin",       earnings: 111839,    finish: "T19" },
+      Jefferson: { golfer: "Chris Kirk",        earnings: 0,         finish: "CUT" },
+      Zach:      { golfer: "Taylor Pendrith",   earnings: 287105,    finish: "T6" },
+    },
+  },
+  {
+    tournament: "The American Express",
+    picks: {
+      Aaron:     { golfer: "Daniel Berger",     earnings: 20844,     finish: "T56" },
+      Austin:    { golfer: "Patrick Cantlay",   earnings: 169740,    finish: "T13" },
+      Cody:      { golfer: "Sam Burns",         earnings: 57918.18,  finish: "T27" },
+      Jefferson: { golfer: "Harry Hall",        earnings: 85100,     finish: "T24" },
+      Zach:      { golfer: "Davis Thompson",    earnings: 0,         finish: "CUT" },
+    },
+  },
+  {
+    tournament: "Farmers Insurance Open",
+    picks: {
+      Aaron:     { golfer: "Keegan Bradley",    earnings: 31264,     finish: "T43" },
+      Austin:    { golfer: "Jason Day",         earnings: 41760,     finish: "T38" },
+      Cody:      { golfer: "Ludvig Åberg",      earnings: 0,         finish: "CUT" },
+      Jefferson: { golfer: "J.J. Spaun",        earnings: 0,         finish: "CUT" },
+      Zach:      { golfer: "Harris English",    earnings: 92640,     finish: "T22" },
+    },
+  },
+  {
+    tournament: "WM Phoenix Open",
+    picks: {
+      Aaron:     { golfer: "Maverick McNealy",  earnings: 188000,    finish: "T13" },
+      Austin:    { golfer: "Rickie Fowler",     earnings: 122720,    finish: "T18" },
+      Cody:      { golfer: "Sahith Theegala",   earnings: 122720,    finish: "T18" },
+      Jefferson: { golfer: "Hideki Matsuyama",  earnings: 1046400,   finish: "P2" },
+      Zach:      { golfer: "Sam Burns",         earnings: 0,         finish: "CUT" },
+    },
+  },
+  {
+    tournament: "AT&T Pebble Beach Pro-Am",
+    picks: {
+      Aaron:     { golfer: "Justin Rose",       earnings: 78375,     finish: "T37" },
+      Austin:    { golfer: "Rory McIlroy",      earnings: 342750,    finish: "T14" },
+      Cody:      { golfer: "Taylor Pendrith",   earnings: 104000,    finish: "T34" },
+      Jefferson: { golfer: "Matt Fitzpatrick",  earnings: 342750,    finish: "T14" },
+      Zach:      { golfer: "Tommy Fleetwood",   earnings: 877500,    finish: "T4" },
+    },
+  },
+  {
+    tournament: "The Genesis Invitational",
+    picks: {
+      Aaron:     { golfer: "Xander Schauffele", earnings: 603200,    finish: "T7" },
+      Austin:    { golfer: "Collin Morikawa",   earnings: 603200,    finish: "T7" },
+      Cody:      { golfer: "Patrick Cantlay",   earnings: 92250,     finish: "T37" },
+      Jefferson: { golfer: "Tommy Fleetwood",   earnings: 603200,    finish: "T7" },
+      Zach:      { golfer: "Patrick Cantlay",   earnings: 92250,     finish: "T37" },
+    },
+  },
+  {
+    tournament: "Cognizant Classic",
+    picks: {
+      Aaron:     { golfer: "Shane Lowry",       earnings: 726400,    finish: "T2" },
+      Austin:    { golfer: "Ryan Gerard",       earnings: 77600,     finish: "T23" },
+      Cody:      { golfer: "Shane Lowry",       earnings: 726400,    finish: "T2" },
+      Jefferson: { golfer: "Max McGreevy",      earnings: 31776,     finish: "T40" },
+      Zach:      { golfer: "Daniel Berger",     earnings: 54816,     finish: "T32" },
+    },
+  },
+  {
+    tournament: "Arnold Palmer Invitational",
+    picks: {
+      Aaron:     { golfer: "Tommy Fleetwood",   earnings: 56000,     finish: "49th" },
+      Austin:    { golfer: "Xander Schauffele", earnings: 157000,    finish: "T24" },
+      Cody:      { golfer: "Xander Schauffele", earnings: 157000,    finish: "T24" },
+      Jefferson: { golfer: "Si Woo Kim",        earnings: 373200,    finish: "T13" },
+      Zach:      { golfer: "Pierceson Coody",   earnings: 0,         finish: "CUT" },
+    },
+  },
+];
+
+// Current / upcoming tournament (set to null when no active event)
+const CURRENT_TOURNAMENT = {
+  tournament: "THE PLAYERS Championship",
+  picks: {
+    Aaron:     { golfer: "Collin Morikawa" },
+    Austin:    { golfer: "Ludvig Åberg" },
+    Cody:      { golfer: "Collin Morikawa" },
+    Jefferson: { golfer: "Ludvig Åberg" },
+    Zach:      { golfer: "Si Woo Kim" },
+  },
+};
+
+// ============================================================
+// PLAYER COLORS
+// ============================================================
+const PCOLORS = {
+  Aaron: "#ffffff",
+  Austin: "#E8A87C",
+  Cody: "#7EC8E3",
+  Jefferson: "#F0D56C",
+  Zach: "#F08080",
+};
+const pc = (n) => PCOLORS[n] || "#aaa";
+
+// ============================================================
+// HELPERS
+// ============================================================
+const fmt = (n) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: n % 1 !== 0 ? 2 : 0, maximumFractionDigits: 2 });
+const fmtShort = (n) => {
+  if (n >= 1000000) return "$" + (n / 1000000).toFixed(1) + "M";
+  if (n >= 1000) return "$" + (n / 1000).toFixed(0) + "K";
+  return "$" + n;
+};
+
+function getStandings() {
+  return PLAYERS.map(name => {
+    let total = 0, count = 0;
+    TOURNAMENTS.forEach(t => { if (t.picks[name]) { total += t.picks[name].earnings; count++; } });
+    return { name, total, count };
+  }).sort((a, b) => b.total - a.total);
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+const standings = getStandings();
+const leader = standings[0];
+const gap = leader.total - standings[1].total;
+
+// Meta
+document.getElementById("meta").innerHTML =
+  `${TOURNAMENTS.length} of 36+ events<span class="dot">·</span>${PLAYERS.length} players<span class="dot">·</span>$100 buy-in`;
+
+// Leader banner
+document.getElementById("leader-banner").innerHTML = `
+  <div>
+    <div class="label">Current Leader</div>
+    <div class="name">${leader.name}</div>
+  </div>
+  <div style="text-align:right">
+    <div class="amount">${fmt(leader.total)}</div>
+    <div class="gap">leads by ${fmt(gap)}</div>
+  </div>`;
+
+// This week
+const twEl = document.getElementById("this-week");
+if (CURRENT_TOURNAMENT) {
+  const chips = PLAYERS.map(p => {
+    const c = pc(p);
+    const last = CURRENT_TOURNAMENT.picks[p]?.golfer?.split(" ").pop() || "?";
+    return `<span class="tw-chip" style="background:${c}18;color:${c};border:1px solid ${c}30">${p.slice(0,3)}: ${last}</span>`;
+  }).join("");
+  twEl.innerHTML = `
+    <div><div class="tw-label">This Week</div><div class="tw-name">${CURRENT_TOURNAMENT.tournament}</div></div>
+    <div class="tw-picks">${chips}</div>`;
+} else {
+  twEl.style.display = "none";
+}
+
+// ============================================================
+// LEADERBOARD
+// ============================================================
+function renderLeaderboard() {
+  const medals = ["🥇","🥈","🥉"];
+  const rows = standings.map((s, i) => {
+    const r = i + 1;
+    const rc = r === 1 ? "r1" : r <= 3 ? "r2" : "rn";
+    const label = medals[i] || r;
+    return `<div class="lb-row">
+      <div class="lb-rank ${rc}">${label}</div>
+      <div class="lb-info">
+        <div class="lb-name">${s.name}</div>
+        <div class="lb-sub">${s.count} tournament${s.count !== 1 ? "s" : ""}</div>
+      </div>
+      <div class="lb-total ${r === 1 ? "first" : ""}">${fmt(s.total)}</div>
+    </div>`;
+  }).join("");
+  document.getElementById("panel-leaderboard").innerHTML = `<div class="leaderboard">${rows}</div>`;
+}
+
+// ============================================================
+// CHART
+// ============================================================
+function renderChart() {
+  const W = 640, H = 320, pL = 58, pR = 16, pT = 20, pB = 72;
+  const cW = W - pL - pR, cH = H - pT - pB;
+
+  const cum = {};
+  PLAYERS.forEach(p => {
+    let r = 0; cum[p] = [0];
+    TOURNAMENTS.forEach(t => { r += t.picks[p]?.earnings || 0; cum[p].push(r); });
+  });
+
+  const mx = Math.ceil(Math.max(...Object.values(cum).flat()) / 500000) * 500000;
+  const pts = TOURNAMENTS.length + 1;
+  const gx = i => pL + (i / (pts - 1)) * cW;
+  const gy = v => pT + cH - (v / mx) * cH;
+  const gridCount = 5;
+
+  const abbrevs = {
+    "Sony Open in Hawaii": "Sony", "The American Express": "AmEx",
+    "Farmers Insurance Open": "Farmers", "WM Phoenix Open": "WMPO",
+    "AT&T Pebble Beach Pro-Am": "AT&T", "The Genesis Invitational": "Genesis",
+    "Cognizant Classic": "Cognizant", "Arnold Palmer Invitational": "API",
+  };
+
+  const sorted = [...PLAYERS].sort((a, b) => cum[b][cum[b].length - 1] - cum[a][cum[a].length - 1]);
+
+  // Grid
+  let svg = `<svg viewBox="0 0 ${W} ${H}" class="chart-svg" xmlns="http://www.w3.org/2000/svg">`;
+  for (let i = 0; i <= gridCount; i++) {
+    const v = (mx / gridCount) * i;
+    svg += `<line x1="${pL}" y1="${gy(v)}" x2="${W-pR}" y2="${gy(v)}" stroke="rgba(255,255,255,0.06)"/>`;
+    svg += `<text x="${pL-8}" y="${gy(v)+4}" text-anchor="end" fill="rgba(255,255,255,0.25)" font-size="10" font-family="'DM Mono',monospace">${fmtShort(v)}</text>`;
+  }
+
+  // X labels
+  svg += `<text x="${gx(0)}" y="${H-pB+16}" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="9" font-family="'DM Sans'">Start</text>`;
+  TOURNAMENTS.forEach((t, i) => {
+    const x = gx(i + 1), y = H - pB + 16;
+    const label = abbrevs[t.tournament] || t.tournament.slice(0, 10);
+    svg += `<text x="${x}" y="${y}" text-anchor="middle" fill="rgba(255,255,255,0.28)" font-size="9" font-family="'DM Sans'" transform="rotate(-20,${x},${y})">${label}</text>`;
+  });
+
+  // Lines and dots
+  sorted.forEach(p => {
+    const d = cum[p].map((v, i) => `${i ? "L" : "M"}${gx(i)},${gy(v)}`).join(" ");
+    svg += `<path data-player="${p}" d="${d}" fill="none" stroke="${pc(p)}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85" style="transition:opacity 0.2s,stroke-width 0.2s"/>`;
+    cum[p].forEach((v, i) => {
+      svg += `<circle data-player="${p}" cx="${gx(i)}" cy="${gy(v)}" r="3" fill="${pc(p)}" opacity="0.9" style="transition:opacity 0.2s,r 0.2s"/>`;
+    });
+  });
+  svg += `</svg>`;
+
+  // Legend
+  const legend = sorted.map(p =>
+    `<div class="legend-item" data-legend="${p}"><div class="legend-swatch" style="background:${pc(p)}"></div>${p}</div>`
+  ).join("");
+
+  document.getElementById("panel-chart").innerHTML = `
+    <div class="chart-container">
+      <div class="chart-title">Cumulative Earnings</div>
+      ${svg}
+      <div class="chart-legend">${legend}</div>
+    </div>`;
+
+  // Hover interactivity
+  document.querySelectorAll(".legend-item").forEach(el => {
+    el.addEventListener("mouseenter", () => {
+      const p = el.dataset.legend;
+      document.querySelectorAll("[data-player]").forEach(node => {
+        if (node.dataset.player === p) {
+          node.setAttribute("opacity", "1");
+          if (node.tagName === "path") node.setAttribute("stroke-width", "3.5");
+          if (node.tagName === "circle") node.setAttribute("r", "4.5");
+        } else {
+          node.setAttribute("opacity", "0.15");
+        }
+      });
+      document.querySelectorAll(".legend-item").forEach(l => {
+        l.classList.toggle("highlighted", l.dataset.legend === p);
+      });
+    });
+    el.addEventListener("mouseleave", () => {
+      document.querySelectorAll("[data-player]").forEach(node => {
+        node.setAttribute("opacity", node.tagName === "path" ? "0.85" : "0.9");
+        if (node.tagName === "path") node.setAttribute("stroke-width", "2");
+        if (node.tagName === "circle") node.setAttribute("r", "3");
+      });
+      document.querySelectorAll(".legend-item").forEach(l => l.classList.remove("highlighted"));
+    });
+  });
+}
+
+// ============================================================
+// PICK HISTORY
+// ============================================================
+function renderHistory() {
+  let html = "";
+
+  // Current tournament
+  if (CURRENT_TOURNAMENT) {
+    const rows = PLAYERS.map(p => {
+      const pk = CURRENT_TOURNAMENT.picks[p] || {};
+      return `<div class="pick-row">
+        <div class="pick-dot" style="background:${pc(p)};opacity:0.45"></div>
+        <div class="pick-detail"><span class="pname">${p}</span><span class="arrow">→</span>${pk.golfer || "No Pick"}</div>
+      </div>`;
+    }).join("");
+    html += `<div class="pick-card pending">
+      <div class="pick-card-header">
+        <div><div class="pick-card-title">${CURRENT_TOURNAMENT.tournament}</div><div class="pick-card-week">In Progress</div></div>
+        <div class="live-badge">Live</div>
+      </div>
+      <div style="padding:6px 0">${rows}</div>
+    </div>`;
+  }
+
+  // Past tournaments (newest first)
+  [...TOURNAMENTS].reverse().forEach((t, i) => {
+    const week = TOURNAMENTS.length - i;
+    const sorted = PLAYERS.map(p => ({
+      name: p, golfer: t.picks[p]?.golfer || "No Pick",
+      earnings: t.picks[p]?.earnings || 0, finish: t.picks[p]?.finish || "—",
+    })).sort((a, b) => b.earnings - a.earnings);
+
+    const rows = sorted.map((pk, j) => {
+      const isCut = pk.finish === "CUT";
+      return `<div class="pick-row">
+        <div class="pick-dot" style="background:${pc(pk.name)};opacity:${j === 0 ? 1 : 0.45}"></div>
+        <div class="pick-detail"><span class="pname">${pk.name}</span><span class="arrow">→</span>${pk.golfer}</div>
+        <div class="pick-finish ${isCut ? "cut" : ""}">${pk.finish}</div>
+        <div class="pick-earnings ${pk.earnings > 0 ? "pos" : "zero"}">${pk.earnings > 0 ? fmt(pk.earnings) : "—"}</div>
+      </div>`;
+    }).join("");
+
+    html += `<div class="pick-card">
+      <div class="pick-card-header">
+        <div><div class="pick-card-title">${t.tournament}</div><div class="pick-card-week">Week ${week}</div></div>
+        <div class="pick-card-best">Best: ${sorted[0].name}</div>
+      </div>
+      <div style="padding:6px 0">${rows}</div>
+    </div>`;
+  });
+
+  document.getElementById("panel-history").innerHTML = `<div class="pick-cards">${html}</div>`;
+}
+
+// ============================================================
+// USED GOLFERS
+// ============================================================
+function renderBurned() {
+  const html = standings.map(s => {
+    const golfers = TOURNAMENTS.map(t => t.picks[s.name]).filter(Boolean).map(p => p.golfer);
+    const currentPick = CURRENT_TOURNAMENT?.picks[s.name]?.golfer;
+    if (currentPick) golfers.push(currentPick);
+    const unique = [...new Set(golfers)];
+
+    const chips = unique.map(g => `<span class="used-chip">${g}</span>`).join("");
+    return `<div class="used-card">
+      <div class="used-header">
+        <div class="used-dot" style="background:${pc(s.name)}"></div>
+        <div class="used-name">${s.name}</div>
+        <div class="used-count">${unique.length} golfer${unique.length !== 1 ? "s" : ""} used</div>
+      </div>
+      <div class="used-chips">${chips}</div>
+    </div>`;
+  }).join("");
+  document.getElementById("panel-burned").innerHTML = `<div class="used-cards">${html}</div>`;
+}
+
+// ============================================================
+// TAB SWITCHING
+// ============================================================
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("panel-" + btn.dataset.tab).classList.add("active");
+  });
+});
+
+// ============================================================
+// INIT
+// ============================================================
+renderLeaderboard();
+renderChart();
+renderHistory();
+renderBurned();
+</script>
+</body>
+</html>
