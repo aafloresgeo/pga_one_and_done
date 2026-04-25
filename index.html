@@ -360,6 +360,16 @@ const TOURNAMENTS = [
       Zach:      { golfer: "Jon Rahm",          earnings: 101250,    finish: "T38" },
     },
   },
+  {
+    tournament: "RBC Heritage",
+    picks: {
+      Aaron:     { golfer: "Sam Burns",         earnings: 256694.44, finish: "T16" },
+      Austin:    { golfer: "Matt Fitzpatrick",  earnings: 3600000,   finish: "1st" },
+      Cody:      { golfer: "Si Woo Kim",        earnings: 1360000,   finish: "3rd" },
+      Jefferson: { golfer: "Russell Henley",    earnings: 142750,    finish: "T25" },
+      Zach:      { golfer: "Xander Schauffele", earnings: 399250,    finish: "T12" },
+    },
+  },
 ];
 
 // Current / upcoming tournament (set to null when no active event)
@@ -481,6 +491,7 @@ function renderChart() {
     "Texas Children's Houston Open": "Houston",
     "Valero Texas Open": "Valero",
     "The Masters": "Masters",
+    "RBC Heritage": "RBC",
   };
 
   const sorted = [...PLAYERS].sort((a, b) => cum[b][cum[b].length - 1] - cum[a][cum[a].length - 1]);
