@@ -410,6 +410,26 @@ const TOURNAMENTS = [
       Zach:      { golfer: "Jordan Spieth",     earnings: 100596.67, finish: "T19" },
     },
   },
+  {
+    tournament: "Charles Schwab Challenge",
+    picks: {
+      Aaron:     { golfer: "Akshay Bhatia",     earnings: 69300,     finish: "T28" },
+      Austin:    { golfer: "Russell Henley",    earnings: 1782000,   finish: "1st" },
+      Cody:      { golfer: "Justin Thomas",     earnings: 193875,    finish: "T13" },
+      Jefferson: { golfer: "Rickie Fowler",     earnings: 0,         finish: "CUT" },
+      Zach:      { golfer: "Justin Thomas",     earnings: 193875,    finish: "T13" },
+    },
+  },
+  {
+    tournament: "The Memorial Tournament",
+    picks: {
+      Aaron:     { golfer: "Ben Griffin",       earnings: 0,         finish: "CUT" },
+      Austin:    { golfer: "Robert MacIntyre",  earnings: 0,         finish: "CUT" },
+      Cody:      { golfer: "Cameron Young",     earnings: 58666.67,  finish: "T46" },
+      Jefferson: { golfer: "Justin Thomas",     earnings: 269333.33, finish: "T19" },
+      Zach:      { golfer: "Matt Fitzpatrick",  earnings: 99000,     finish: "T36" },
+    },
+  },
 ];
 
 // Current / upcoming tournament (set to null when no active event)
@@ -536,6 +556,8 @@ function renderChart() {
     "Truist Championship": "Truist",
     "PGA Championship": "PGA",
     "AT&T Byron Nelson": "Nelson",
+    "Charles Schwab Challenge": "Schwab",
+    "The Memorial Tournament": "Memorial",
   };
 
   const sorted = [...PLAYERS].sort((a, b) => cum[b][cum[b].length - 1] - cum[a][cum[a].length - 1]);
