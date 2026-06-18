@@ -430,6 +430,16 @@ const TOURNAMENTS = [
       Zach:      { golfer: "Matt Fitzpatrick",  earnings: 99000,     finish: "T36" },
     },
   },
+  {
+    tournament: "RBC Canadian Open",
+    picks: {
+      Aaron:     { golfer: "Eric Cole",         earnings: 0,         finish: "CUT" },
+      Austin:    { golfer: "Sam Burns",         earnings: 96856.67,  finish: "T20" },
+      Cody:      { golfer: "Nick Taylor",       earnings: 21168,     finish: "T65" },
+      Jefferson: { golfer: "Nick Taylor",       earnings: 21168,     finish: "T65" },
+      Zach:      { golfer: "Aaron Rai",         earnings: 0,         finish: "CUT" },
+    },
+  },
 ];
 
 // Current / upcoming tournament (set to null when no active event)
@@ -558,6 +568,7 @@ function renderChart() {
     "AT&T Byron Nelson": "Nelson",
     "Charles Schwab Challenge": "Schwab",
     "The Memorial Tournament": "Memorial",
+    "RBC Canadian Open": "Canada",
   };
 
   const sorted = [...PLAYERS].sort((a, b) => cum[b][cum[b].length - 1] - cum[a][cum[a].length - 1]);
