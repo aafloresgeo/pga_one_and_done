@@ -460,6 +460,16 @@ const TOURNAMENTS = [
       Zach:      { golfer: "Brian Harman",      earnings: 154500,    finish: "T25" },
     },
   },
+  {
+    tournament: "John Deere Classic",
+    picks: {
+      Aaron:     { golfer: "Keith Mitchell",    earnings: 21358.86,  finish: "T51" },
+      Austin:    { golfer: "No Pick",           earnings: 0,         finish: "—" },
+      Cody:      { golfer: "Emiliano Grillo",   earnings: 66188.57,  finish: "T26" },
+      Jefferson: { golfer: "Tom Kim",           earnings: 26206.40,  finish: "T46" },
+      Zach:      { golfer: "Ben Griffin",       earnings: 100056,    finish: "T21" },
+    },
+  },
 ];
 
 // Current / upcoming tournament (set to null when no active event)
@@ -591,6 +601,7 @@ function renderChart() {
     "RBC Canadian Open": "Canada",
     "U.S. Open": "US Open",
     "Travelers Championship": "Travelers",
+    "John Deere Classic": "Deere",
   };
 
   const sorted = [...PLAYERS].sort((a, b) => cum[b][cum[b].length - 1] - cum[a][cum[a].length - 1]);
