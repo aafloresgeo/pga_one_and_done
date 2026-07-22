@@ -480,6 +480,16 @@ const TOURNAMENTS = [
       Zach:      { golfer: "No Pick",           earnings: 0,         finish: "—" },
     },
   },
+  {
+    tournament: "The Open Championship",
+    picks: {
+      Aaron:     { golfer: "Matt Fitzpatrick",  earnings: 0,         finish: "CUT" },
+      Austin:    { golfer: "Jon Rahm",          earnings: 51707,     finish: "T46" },
+      Cody:      { golfer: "Matt Fitzpatrick",  earnings: 0,         finish: "CUT" },
+      Jefferson: { golfer: "Rory McIlroy",      earnings: 69750,     finish: "T40" },
+      Zach:      { golfer: "No Pick",           earnings: 0,         finish: "—" },
+    },
+  },
 ];
 
 // Current / upcoming tournament (set to null when no active event)
@@ -613,6 +623,7 @@ function renderChart() {
     "Travelers Championship": "Travelers",
     "John Deere Classic": "Deere",
     "Genesis Scottish Open": "Scottish",
+    "The Open Championship": "Open",
   };
 
   const sorted = [...PLAYERS].sort((a, b) => cum[b][cum[b].length - 1] - cum[a][cum[a].length - 1]);
