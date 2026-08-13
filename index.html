@@ -490,6 +490,36 @@ const TOURNAMENTS = [
       Zach:      { golfer: "No Pick",           earnings: 0,         finish: "—" },
     },
   },
+  {
+    tournament: "3M Open",
+    picks: {
+      Aaron:     { golfer: "Tony Finau",        earnings: 0,         finish: "CUT" },
+      Austin:    { golfer: "Maverick McNealy",  earnings: 45848,     finish: "T34" },
+      Cody:      { golfer: "Jackson Koivun",    earnings: 1584000,   finish: "1st" },
+      Jefferson: { golfer: "Corey Conners",     earnings: 36520,     finish: "T39" },
+      Zach:      { golfer: "No Pick",           earnings: 0,         finish: "—" },
+    },
+  },
+  {
+    tournament: "Rocket Classic",
+    picks: {
+      Aaron:     { golfer: "Sudarshan Yellamaraju", earnings: 0,     finish: "CUT" },
+      Austin:    { golfer: "No Pick",           earnings: 0,         finish: "—" },
+      Cody:      { golfer: "Chris Gotterup",    earnings: 0,         finish: "CUT" },
+      Jefferson: { golfer: "Wyndham Clark",     earnings: 0,         finish: "CUT" },
+      Zach:      { golfer: "No Pick",           earnings: 0,         finish: "—" },
+    },
+  },
+  {
+    tournament: "Wyndham Championship",
+    picks: {
+      Aaron:     { golfer: "Joel Dahmen",       earnings: 31905.90,  finish: "T38" },
+      Austin:    { golfer: "No Pick",           earnings: 0,         finish: "—" },
+      Cody:      { golfer: "Aaron Rai",         earnings: 51047.22,  finish: "T29" },
+      Jefferson: { golfer: "Alex Smalley",      earnings: 249475,    finish: "T7" },
+      Zach:      { golfer: "No Pick",           earnings: 0,         finish: "—" },
+    },
+  },
 ];
 
 // Current / upcoming tournament (set to null when no active event)
@@ -624,6 +654,9 @@ function renderChart() {
     "John Deere Classic": "Deere",
     "Genesis Scottish Open": "Scottish",
     "The Open Championship": "Open",
+    "3M Open": "3M",
+    "Rocket Classic": "Rocket",
+    "Wyndham Championship": "Wyndham",
   };
 
   const sorted = [...PLAYERS].sort((a, b) => cum[b][cum[b].length - 1] - cum[a][cum[a].length - 1]);
