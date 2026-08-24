@@ -2,550 +2,228 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>One &amp; Done — 2025–26 PGA Tour</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg-deep: #0f1a0f;
-    --bg-mid: #1a2e1a;
-    --green-accent: #8FBF6B;
-    --green-light: #D4E8C2;
+    --bg-deep: #0f1a0f; --bg-mid: #1a2e1a;
+    --green-accent: #8FBF6B; --green-light: #D4E8C2;
     --green-muted: rgba(143,191,107,0.15);
-    --text-primary: #f0f5ec;
-    --text-dim: rgba(255,255,255,0.3);
-    --text-dimmer: rgba(255,255,255,0.22);
-    --border: rgba(255,255,255,0.06);
-    --card-bg: rgba(255,255,255,0.025);
-    --hover-bg: rgba(255,255,255,0.025);
+    --text-primary: #f0f5ec; --text-dim: rgba(255,255,255,0.3);
+    --text-dimmer: rgba(255,255,255,0.22); --border: rgba(255,255,255,0.06);
+    --card-bg: rgba(255,255,255,0.025); --hover-bg: rgba(255,255,255,0.025);
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     min-height: 100vh;
     background: linear-gradient(170deg, var(--bg-mid) 0%, var(--bg-deep) 40%, #111510 100%);
-    color: var(--text-primary);
-    font-family: 'DM Sans', sans-serif;
-    -webkit-font-smoothing: antialiased;
+    color: var(--text-primary); font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
   }
-
-  /* Fairway stripes */
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
+    content: ''; position: fixed; inset: 0;
     background: repeating-linear-gradient(90deg, rgba(255,255,255,0.005) 0px, rgba(255,255,255,0.005) 50px, transparent 50px, transparent 100px);
-    pointer-events: none;
-    z-index: 0;
+    pointer-events: none; z-index: 0;
   }
-
-  .wrapper { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; padding: 0 16px; }
-
-  /* Header */
-  .header { padding: 36px 0 16px; text-align: center; }
-  .header .season-label {
-    font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em;
-    color: var(--green-accent); margin-bottom: 6px; font-weight: 500;
-  }
-  .header h1 {
-    font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 800;
-    letter-spacing: -0.02em; color: #fff;
-  }
-  .header .meta { margin-top: 10px; font-size: 13px; color: var(--text-dim); }
-  .header .meta .dot { margin: 0 8px; opacity: 0.3; }
-
-  /* Leader banner */
+  .wrapper { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; padding: 0 12px; }
+  .header { padding: 28px 0 12px; text-align: center; }
+  .header .season-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--green-accent); margin-bottom: 6px; font-weight: 500; }
+  .header h1 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 800; letter-spacing: -0.02em; color: #fff; }
+  .header .meta { margin-top: 8px; font-size: 12px; color: var(--text-dim); }
+  .header .meta .dot { margin: 0 6px; opacity: 0.3; }
   .leader-banner {
-    margin: 8px 0 18px; padding: 18px 22px; border-radius: 14px;
+    margin: 6px 0 14px; padding: 14px 16px; border-radius: 12px;
     background: linear-gradient(135deg, rgba(143,191,107,0.13), rgba(143,191,107,0.03));
-    border: 1px solid rgba(143,191,107,0.18);
-    display: flex; justify-content: space-between; align-items: center;
+    border: 1px solid rgba(143,191,107,0.18); display: flex; justify-content: space-between; align-items: center;
   }
-  .leader-banner .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--green-accent); margin-bottom: 4px; }
-  .leader-banner .name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: #fff; }
-  .leader-banner .amount { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; color: var(--green-light); }
-  .leader-banner .gap { font-size: 12px; color: rgba(255,255,255,0.28); margin-top: 2px; }
-
-  /* This week banner */
+  .leader-banner .label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--green-accent); margin-bottom: 3px; }
+  .leader-banner .name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #fff; }
+  .leader-banner .amount { font-family: 'DM Mono', monospace; font-size: 18px; font-weight: 500; color: var(--green-light); }
+  .leader-banner .gap { font-size: 11px; color: rgba(255,255,255,0.28); margin-top: 2px; }
   .this-week {
-    margin: 0 0 18px; padding: 14px 20px; border-radius: 10px;
+    margin: 0 0 14px; padding: 12px 16px; border-radius: 10px;
     background: rgba(143,191,107,0.08); border: 1px dashed rgba(143,191,107,0.25);
     display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
   }
-  .this-week .tw-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--green-accent); margin-bottom: 2px; font-weight: 600; }
-  .this-week .tw-name { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600; color: var(--text-primary); }
-  .this-week .tw-picks { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
-  .this-week .tw-chip {
-    font-size: 10px; padding: 2px 8px; border-radius: 10px;
-    font-family: 'DM Sans', sans-serif; font-weight: 500; white-space: nowrap;
-  }
-
-  /* Tabs */
-  .tabs { display: flex; gap: 4px; margin-bottom: 14px; }
+  .this-week .tw-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--green-accent); margin-bottom: 2px; font-weight: 600; }
+  .this-week .tw-name { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; color: var(--text-primary); }
+  .this-week .tw-picks { display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+  .this-week .tw-chip { font-size: 9px; padding: 2px 7px; border-radius: 10px; font-weight: 500; white-space: nowrap; }
+  .tabs { display: flex; gap: 3px; margin-bottom: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .tab-btn {
-    flex: 1; padding: 10px 0; border: none; border-radius: 8px;
-    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
-    cursor: pointer; transition: all 0.2s;
+    flex: 1; min-width: 0; padding: 9px 0; border: none; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s; white-space: nowrap;
     background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.3);
   }
   .tab-btn.active { background: rgba(143,191,107,0.16); color: var(--green-light); }
-
-  /* Content area */
   .content { padding-bottom: 40px; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
-
-  /* Leaderboard */
-  .leaderboard {
-    background: rgba(255,255,255,0.02); border-radius: 14px;
-    border: 1px solid var(--border); overflow: hidden;
-  }
-  .lb-row {
-    display: flex; align-items: center; padding: 14px 20px;
-    border-bottom: 1px solid var(--border); transition: background 0.15s; cursor: default;
-  }
+  .leaderboard { background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
+  .lb-row { display: flex; align-items: center; padding: 12px 14px; border-bottom: 1px solid var(--border); transition: background 0.15s; cursor: default; }
   .lb-row:last-child { border-bottom: none; }
-  .lb-row:hover { background: var(--hover-bg); }
-  .lb-rank {
-    width: 36px; height: 36px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif; font-weight: 700; flex-shrink: 0;
-  }
-  .lb-rank.r1 { background: linear-gradient(135deg, #8FBF6B, #D4E8C2); color: #1a2e1a; font-size: 18px; }
-  .lb-rank.r2, .lb-rank.r3 { background: rgba(143,191,107,0.12); color: rgba(255,255,255,0.45); font-size: 16px; }
-  .lb-rank.rn { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.45); font-size: 16px; }
-  .lb-info { margin-left: 16px; flex: 1; min-width: 0; }
-  .lb-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; }
-  .lb-sub { font-size: 12px; color: rgba(255,255,255,0.28); margin-top: 2px; }
-  .lb-total { font-family: 'DM Mono', monospace; font-size: 17px; font-weight: 500; white-space: nowrap; }
+  .lb-rank { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 700; flex-shrink: 0; font-size: 14px; }
+  .lb-rank.r1 { background: linear-gradient(135deg, #8FBF6B, #D4E8C2); color: #1a2e1a; font-size: 16px; }
+  .lb-rank.r2, .lb-rank.r3 { background: rgba(143,191,107,0.12); color: rgba(255,255,255,0.45); }
+  .lb-rank.rn { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.45); }
+  .lb-info { margin-left: 12px; flex: 1; min-width: 0; }
+  .lb-name { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; }
+  .lb-sub { font-size: 11px; color: rgba(255,255,255,0.28); margin-top: 1px; }
+  .lb-total { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; white-space: nowrap; }
   .lb-total.first { color: var(--green-light); }
-
-  /* Chart */
-  .chart-container {
-    background: rgba(255,255,255,0.02); border-radius: 14px;
-    border: 1px solid var(--border); padding: 18px 14px 14px;
-  }
-  .chart-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; margin-bottom: 14px; padding-left: 4px; }
+  .chart-container { background: rgba(255,255,255,0.02); border-radius: 12px; border: 1px solid var(--border); padding: 14px 8px 10px; }
+  .chart-title { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600; margin-bottom: 10px; padding-left: 4px; }
   .chart-svg { width: 100%; display: block; }
-  .chart-legend { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
-  .legend-item {
-    display: flex; align-items: center; gap: 6px; font-size: 12px;
-    color: rgba(255,255,255,0.5); cursor: pointer; transition: color 0.2s; padding: 2px 0; user-select: none;
-  }
+  .chart-legend { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: rgba(255,255,255,0.5); cursor: pointer; transition: color 0.2s; padding: 4px 0; user-select: none; -webkit-tap-highlight-color: transparent; }
   .legend-item:hover, .legend-item.highlighted { color: #fff; }
-  .legend-swatch { width: 14px; height: 3px; border-radius: 2px; }
-
-  /* Pick cards */
-  .pick-cards { display: flex; flex-direction: column; gap: 12px; }
-  .pick-card {
-    background: var(--card-bg); border-radius: 12px;
-    border: 1px solid var(--border); overflow: hidden;
-  }
+  .legend-swatch { width: 12px; height: 3px; border-radius: 2px; }
+  .pick-cards { display: flex; flex-direction: column; gap: 10px; }
+  .pick-card { background: var(--card-bg); border-radius: 10px; border: 1px solid var(--border); overflow: hidden; }
   .pick-card.pending { border-color: rgba(143,191,107,0.25); }
-  .pick-card-header {
-    padding: 14px 20px 10px; border-bottom: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .pick-card-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; }
-  .pick-card-week { font-size: 10px; color: var(--text-dimmer); margin-top: 3px; text-transform: uppercase; letter-spacing: 0.1em; }
-  .pick-card-best { font-size: 10px; color: var(--green-accent); text-transform: uppercase; letter-spacing: 0.08em; }
-  .live-badge {
-    font-size: 10px; background: var(--green-muted); color: var(--green-accent);
-    padding: 3px 10px; border-radius: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
-  }
-  .pick-row { display: flex; align-items: center; padding: 7px 20px; gap: 10px; }
-  .pick-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-  .pick-detail { flex: 1; font-size: 13px; color: rgba(255,255,255,0.55); min-width: 0; }
+  .pick-card-header { padding: 12px 14px 8px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .pick-card-title { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600; }
+  .pick-card-week { font-size: 9px; color: var(--text-dimmer); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .pick-card-best { font-size: 9px; color: var(--green-accent); text-transform: uppercase; letter-spacing: 0.08em; }
+  .live-badge { font-size: 9px; background: var(--green-muted); color: var(--green-accent); padding: 3px 8px; border-radius: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .pick-row { display: flex; align-items: center; padding: 6px 14px; gap: 8px; }
+  .pick-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .pick-detail { flex: 1; font-size: 12px; color: rgba(255,255,255,0.55); min-width: 0; overflow: hidden; text-overflow: ellipsis; }
   .pick-detail .pname { color: var(--text-primary); font-weight: 500; }
-  .pick-detail .arrow { margin: 0 6px; opacity: 0.25; }
-  .pick-finish { font-size: 11px; color: var(--text-dim); min-width: 28px; text-align: right; }
+  .pick-detail .arrow { margin: 0 4px; opacity: 0.25; }
+  .pick-finish { font-size: 10px; color: var(--text-dim); min-width: 24px; text-align: right; flex-shrink: 0; }
   .pick-finish.cut { color: rgba(255,100,100,0.5); }
-  .pick-earnings { font-family: 'DM Mono', monospace; font-size: 13px; min-width: 70px; text-align: right; }
+  .pick-earnings { font-family: 'DM Mono', monospace; font-size: 12px; min-width: 60px; text-align: right; flex-shrink: 0; }
   .pick-earnings.zero { color: rgba(255,255,255,0.18); }
   .pick-earnings.pos { color: rgba(255,255,255,0.6); }
-
-  /* Used golfers */
-  .used-cards { display: flex; flex-direction: column; gap: 14px; }
-  .used-card {
-    background: var(--card-bg); border-radius: 12px;
-    border: 1px solid var(--border); padding: 14px 20px;
-  }
-  .used-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-  .used-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .used-name { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600; }
-  .used-count { font-size: 11px; color: var(--text-dimmer); margin-left: auto; }
-  .used-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .used-chip {
-    font-size: 11px; padding: 3px 10px; border-radius: 20px;
-    background: rgba(143,191,107,0.1); color: #B8D9A0;
-    border: 1px solid rgba(143,191,107,0.18); font-weight: 500;
-  }
-
-  /* Fade-in animation */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .used-cards { display: flex; flex-direction: column; gap: 12px; }
+  .used-card { background: var(--card-bg); border-radius: 10px; border: 1px solid var(--border); padding: 12px 14px; }
+  .used-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .used-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .used-name { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600; }
+  .used-count { font-size: 10px; color: var(--text-dimmer); margin-left: auto; }
+  .used-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .used-chip { font-size: 10px; padding: 3px 8px; border-radius: 16px; background: rgba(143,191,107,0.1); color: #B8D9A0; border: 1px solid rgba(143,191,107,0.18); font-weight: 500; }
+  /* Live tab */
+  .live-card { background: rgba(255,255,255,0.025); border-radius: 12px; border: 1px solid rgba(143,191,107,0.2); overflow: hidden; }
+  .live-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+  .live-header-info {}
+  .live-tournament { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; }
+  .live-course { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 3px; }
+  .live-round-badge { font-size: 10px; background: rgba(143,191,107,0.15); color: var(--green-accent); padding: 4px 10px; border-radius: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; flex-shrink: 0; }
+  .live-section-label { font-size: 10px; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 6px; padding: 0 16px; }
+  .live-pick-row { display: flex; align-items: center; padding: 10px 16px; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .live-pick-row:last-child { border-bottom: none; }
+  .live-pick-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .live-pick-name { font-size: 14px; font-weight: 500; width: 70px; flex-shrink: 0; }
+  .live-pick-golfer { font-size: 13px; color: rgba(255,255,255,0.5); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .live-pick-pos { font-size: 13px; font-weight: 500; text-align: right; white-space: nowrap; flex-shrink: 0; }
+  .live-pick-pos.good { color: var(--green-accent); }
+  .live-pick-pos.mid { color: rgba(255,255,255,0.5); }
+  .live-pick-pos.bad { color: rgba(255,100,100,0.5); }
+  .live-projected { padding: 10px 16px; }
+  .live-proj-row { display: flex; align-items: center; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.04); gap: 6px; }
+  .live-proj-row:last-child { border-bottom: none; }
+  .live-proj-rank { font-size: 11px; color: rgba(255,255,255,0.25); width: 18px; flex-shrink: 0; }
+  .live-proj-name { font-size: 13px; font-weight: 500; flex: 1; }
+  .live-proj-total { font-family: 'DM Mono', monospace; font-size: 12px; color: rgba(255,255,255,0.5); }
+  .live-proj-delta { font-size: 10px; min-width: 50px; text-align: right; flex-shrink: 0; }
+  .live-proj-delta.pos { color: var(--green-accent); }
+  .live-link { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 14px 0 0; padding: 12px; border-radius: 10px; border: 1px solid rgba(143,191,107,0.25); background: rgba(143,191,107,0.06); text-decoration: none; color: var(--green-accent); font-size: 14px; font-weight: 500; -webkit-tap-highlight-color: transparent; }
+  .live-link:active { background: rgba(143,191,107,0.12); }
+  .live-no-event { text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.25); font-size: 14px; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   .fade-in { animation: fadeUp 0.4s ease both; }
+  @media (min-width: 500px) {
+    .wrapper { padding: 0 16px; }
+    .header h1 { font-size: 34px; }
+    .leader-banner { padding: 18px 22px; }
+    .leader-banner .name { font-size: 22px; }
+    .leader-banner .amount { font-size: 22px; }
+    .lb-row { padding: 14px 20px; }
+    .lb-rank { width: 36px; height: 36px; }
+    .lb-name { font-size: 17px; }
+    .lb-total { font-size: 17px; }
+    .pick-row { padding: 7px 20px; }
+    .pick-detail { font-size: 13px; }
+    .pick-earnings { font-size: 13px; min-width: 70px; }
+    .tab-btn { font-size: 13px; }
+  }
 </style>
 </head>
 <body>
-
 <div class="wrapper">
-  <!-- Header -->
   <div class="header fade-in">
     <div class="season-label">⛳ 2025–26 PGA Tour Season</div>
     <h1>One &amp; Done</h1>
     <div class="meta" id="meta"></div>
   </div>
-
-  <!-- Leader -->
   <div class="leader-banner fade-in" style="animation-delay:0.05s" id="leader-banner"></div>
-
-  <!-- This Week -->
   <div class="this-week fade-in" style="animation-delay:0.1s" id="this-week"></div>
-
-  <!-- Tabs -->
   <div class="tabs fade-in" style="animation-delay:0.15s">
-    <button class="tab-btn active" data-tab="leaderboard">Standings</button>
+    <button class="tab-btn active" data-tab="live">Live</button>
+    <button class="tab-btn" data-tab="leaderboard">Standings</button>
     <button class="tab-btn" data-tab="chart">Earnings</button>
     <button class="tab-btn" data-tab="history">Picks</button>
     <button class="tab-btn" data-tab="burned">Used</button>
   </div>
-
-  <!-- Content -->
   <div class="content fade-in" style="animation-delay:0.2s">
-    <div class="tab-panel active" id="panel-leaderboard"></div>
+    <div class="tab-panel active" id="panel-live"></div>
+    <div class="tab-panel" id="panel-leaderboard"></div>
     <div class="tab-panel" id="panel-chart"></div>
     <div class="tab-panel" id="panel-history"></div>
     <div class="tab-panel" id="panel-burned"></div>
   </div>
 </div>
-
 <script>
-// ============================================================
-// DATA — Edit this section after each tournament
-// ============================================================
 const PLAYERS = ["Aaron", "Austin", "Cody", "Jefferson", "Zach"];
-
 const TOURNAMENTS = [
-  {
-    tournament: "Sony Open in Hawaii",
-    picks: {
-      Aaron:     { golfer: "Si Woo Kim",       earnings: 220675,    finish: "T11" },
-      Austin:    { golfer: "Nick Taylor",       earnings: 163041.67, finish: "T13" },
-      Cody:      { golfer: "Ben Griffin",       earnings: 111839,    finish: "T19" },
-      Jefferson: { golfer: "Chris Kirk",        earnings: 0,         finish: "CUT" },
-      Zach:      { golfer: "Taylor Pendrith",   earnings: 287105,    finish: "T6" },
-    },
-  },
-  {
-    tournament: "The American Express",
-    picks: {
-      Aaron:     { golfer: "Daniel Berger",     earnings: 20844,     finish: "T56" },
-      Austin:    { golfer: "Patrick Cantlay",   earnings: 169740,    finish: "T13" },
-      Cody:      { golfer: "Sam Burns",         earnings: 57918.18,  finish: "T27" },
-      Jefferson: { golfer: "Harry Hall",        earnings: 85100,     finish: "T24" },
-      Zach:      { golfer: "Davis Thompson",    earnings: 0,         finish: "CUT" },
-    },
-  },
-  {
-    tournament: "Farmers Insurance Open",
-    picks: {
-      Aaron:     { golfer: "Keegan Bradley",    earnings: 31264,     finish: "T43" },
-      Austin:    { golfer: "Jason Day",         earnings: 41760,     finish: "T38" },
-      Cody:      { golfer: "Ludvig Åberg",      earnings: 0,         finish: "CUT" },
-      Jefferson: { golfer: "J.J. Spaun",        earnings: 0,         finish: "CUT" },
-      Zach:      { golfer: "Harris English",    earnings: 92640,     finish: "T22" },
-    },
-  },
-  {
-    tournament: "WM Phoenix Open",
-    picks: {
-      Aaron:     { golfer: "Maverick McNealy",  earnings: 188000,    finish: "T13" },
-      Austin:    { golfer: "Rickie Fowler",     earnings: 122720,    finish: "T18" },
-      Cody:      { golfer: "Sahith Theegala",   earnings: 122720,    finish: "T18" },
-      Jefferson: { golfer: "Hideki Matsuyama",  earnings: 1046400,   finish: "P2" },
-      Zach:      { golfer: "Sam Burns",         earnings: 0,         finish: "CUT" },
-    },
-  },
-  {
-    tournament: "AT&T Pebble Beach Pro-Am",
-    picks: {
-      Aaron:     { golfer: "Justin Rose",       earnings: 78375,     finish: "T37" },
-      Austin:    { golfer: "Rory McIlroy",      earnings: 342750,    finish: "T14" },
-      Cody:      { golfer: "Taylor Pendrith",   earnings: 104000,    finish: "T34" },
-      Jefferson: { golfer: "Matt Fitzpatrick",  earnings: 342750,    finish: "T14" },
-      Zach:      { golfer: "Tommy Fleetwood",   earnings: 877500,    finish: "T4" },
-    },
-  },
-  {
-    tournament: "The Genesis Invitational",
-    picks: {
-      Aaron:     { golfer: "Xander Schauffele", earnings: 603200,    finish: "T7" },
-      Austin:    { golfer: "Collin Morikawa",   earnings: 603200,    finish: "T7" },
-      Cody:      { golfer: "Patrick Cantlay",   earnings: 92250,     finish: "T37" },
-      Jefferson: { golfer: "Tommy Fleetwood",   earnings: 603200,    finish: "T7" },
-      Zach:      { golfer: "Patrick Cantlay",   earnings: 92250,     finish: "T37" },
-    },
-  },
-  {
-    tournament: "Cognizant Classic",
-    picks: {
-      Aaron:     { golfer: "Shane Lowry",       earnings: 726400,    finish: "T2" },
-      Austin:    { golfer: "Ryan Gerard",       earnings: 77600,     finish: "T23" },
-      Cody:      { golfer: "Shane Lowry",       earnings: 726400,    finish: "T2" },
-      Jefferson: { golfer: "Max McGreevy",      earnings: 31776,     finish: "T40" },
-      Zach:      { golfer: "Daniel Berger",     earnings: 54816,     finish: "T32" },
-    },
-  },
-  {
-    tournament: "Arnold Palmer Invitational",
-    picks: {
-      Aaron:     { golfer: "Tommy Fleetwood",   earnings: 56000,     finish: "49th" },
-      Austin:    { golfer: "Xander Schauffele", earnings: 157000,    finish: "T24" },
-      Cody:      { golfer: "Xander Schauffele", earnings: 157000,    finish: "T24" },
-      Jefferson: { golfer: "Si Woo Kim",        earnings: 373200,    finish: "T13" },
-      Zach:      { golfer: "Pierceson Coody",   earnings: 0,         finish: "CUT" },
-    },
-  },
-  {
-    tournament: "THE PLAYERS Championship",
-    picks: {
-      Aaron:     { golfer: "Russell Henley",    earnings: 409027.78, finish: "T13" },
-      Austin:    { golfer: "Ludvig Åberg",      earnings: 925000,    finish: "T5" },
-      Cody:      { golfer: "Tommy Fleetwood",   earnings: 731250,    finish: "T8" },
-      Jefferson: { golfer: "Ludvig Åberg",      earnings: 925000,    finish: "T5" },
-      Zach:      { golfer: "Si Woo Kim",        earnings: 61083.33,  finish: "T50" },
-    },
-  },
-  {
-    tournament: "Valspar Championship",
-    picks: {
-      Aaron:     { golfer: "Viktor Hovland",    earnings: 0,         finish: "CUT" },
-      Austin:    { golfer: "Justin Thomas",     earnings: 51142,     finish: "T30" },
-      Cody:      { golfer: "Brooks Koepka",     earnings: 108290,    finish: "T18" },
-      Jefferson: { golfer: "Jordan Spieth",     earnings: 211575,    finish: "T11" },
-      Zach:      { golfer: "Jacob Bridgeman",   earnings: 161525,    finish: "T14" },
-    },
-  },
-  {
-    tournament: "Texas Children's Houston Open",
-    picks: {
-      Aaron:     { golfer: "Harris English",    earnings: 96525,     finish: "T21" },
-      Austin:    { golfer: "Min Woo Lee",       earnings: 584100,    finish: "T3" },
-      Cody:      { golfer: "Adam Scott",        earnings: 96525,     finish: "T21" },
-      Jefferson: { golfer: "Ryan Gerard",       earnings: 0,         finish: "CUT" },
-      Zach:      { golfer: "Chris Gotterup",    earnings: 322987,    finish: "T6" },
-    },
-  },
-  {
-    tournament: "Valero Texas Open",
-    picks: {
-      Aaron:     { golfer: "Hideki Matsuyama",  earnings: 95550,     finish: "T21" },
-      Austin:    { golfer: "Tommy Fleetwood",   earnings: 237650,    finish: "T10" },
-      Cody:      { golfer: "Russell Henley",    earnings: 0,         finish: "CUT" },
-      Jefferson: { golfer: "Sepp Straka",       earnings: 0,         finish: "CUT" },
-      Zach:      { golfer: "Russell Henley",    earnings: 0,         finish: "CUT" },
-    },
-  },
-  {
-    tournament: "The Masters",
-    picks: {
-      Aaron:     { golfer: "Scottie Scheffler", earnings: 2430000,   finish: "2nd" },
-      Austin:    { golfer: "Scottie Scheffler", earnings: 2430000,   finish: "2nd" },
-      Cody:      { golfer: "Justin Rose",       earnings: 1080000,   finish: "T3" },
-      Jefferson: { golfer: "Scottie Scheffler", earnings: 2430000,   finish: "2nd" },
-      Zach:      { golfer: "Jon Rahm",          earnings: 101250,    finish: "T38" },
-    },
-  },
-  {
-    tournament: "RBC Heritage",
-    picks: {
-      Aaron:     { golfer: "Sam Burns",         earnings: 256694.44, finish: "T16" },
-      Austin:    { golfer: "Matt Fitzpatrick",  earnings: 3600000,   finish: "1st" },
-      Cody:      { golfer: "Si Woo Kim",        earnings: 1360000,   finish: "3rd" },
-      Jefferson: { golfer: "Russell Henley",    earnings: 142750,    finish: "T25" },
-      Zach:      { golfer: "Xander Schauffele", earnings: 399250,    finish: "T12" },
-    },
-  },
-  {
-    tournament: "Cadillac Championship",
-    picks: {
-      Aaron:     { golfer: "Cameron Young",     earnings: 3600000,   finish: "1st" },
-      Austin:    { golfer: "Viktor Hovland",    earnings: 72181.82,  finish: "T38" },
-      Cody:      { golfer: "Viktor Hovland",    earnings: 72181.82,  finish: "T38" },
-      Jefferson: { golfer: "Harris English",    earnings: 44500,     finish: "T55" },
-      Zach:      { golfer: "Collin Morikawa",   earnings: 41500,     finish: "T62" },
-    },
-  },
-  {
-    tournament: "Truist Championship",
-    picks: {
-      Aaron:     { golfer: "Ludvig Åberg",      earnings: 600000,    finish: "T8" },
-      Austin:    { golfer: "Cameron Young",     earnings: 500000,    finish: "T10" },
-      Cody:      { golfer: "Rory McIlroy",      earnings: 242100,    finish: "T19" },
-      Jefferson: { golfer: "Xander Schauffele", earnings: 42500,     finish: "T60" },
-      Zach:      { golfer: "Adam Scott",        earnings: 156643,    finish: "T24" },
-    },
-  },
-  {
-    tournament: "PGA Championship",
-    picks: {
-      Aaron:     { golfer: "Chris Gotterup",    earnings: 496707.50, finish: "T10" },
-      Austin:    { golfer: "Brooks Koepka",     earnings: 34186,     finish: "T55" },
-      Cody:      { golfer: "Jon Rahm",          earnings: 1804000,   finish: "T2" },
-      Jefferson: { golfer: "Cameron Young",     earnings: 125523.33, finish: "T26" },
-      Zach:      { golfer: "Scottie Scheffler", earnings: 364762.50, finish: "T14" },
-    },
-  },
-  {
-    tournament: "AT&T Byron Nelson",
-    picks: {
-      Aaron:     { golfer: "Brooks Koepka",     earnings: 187975,    finish: "T14" },
-      Austin:    { golfer: "Jordan Spieth",     earnings: 100596.67, finish: "T19" },
-      Cody:      { golfer: "Jordan Spieth",     earnings: 100596.67, finish: "T19" },
-      Jefferson: { golfer: "Ryo Hisatsune",     earnings: 100596.67, finish: "T19" },
-      Zach:      { golfer: "Jordan Spieth",     earnings: 100596.67, finish: "T19" },
-    },
-  },
-  {
-    tournament: "Charles Schwab Challenge",
-    picks: {
-      Aaron:     { golfer: "Akshay Bhatia",     earnings: 69300,     finish: "T28" },
-      Austin:    { golfer: "Russell Henley",    earnings: 1782000,   finish: "1st" },
-      Cody:      { golfer: "Justin Thomas",     earnings: 193875,    finish: "T13" },
-      Jefferson: { golfer: "Rickie Fowler",     earnings: 0,         finish: "CUT" },
-      Zach:      { golfer: "Justin Thomas",     earnings: 193875,    finish: "T13" },
-    },
-  },
-  {
-    tournament: "The Memorial Tournament",
-    picks: {
-      Aaron:     { golfer: "Ben Griffin",       earnings: 0,         finish: "CUT" },
-      Austin:    { golfer: "Robert MacIntyre",  earnings: 0,         finish: "CUT" },
-      Cody:      { golfer: "Cameron Young",     earnings: 58666.67,  finish: "T46" },
-      Jefferson: { golfer: "Justin Thomas",     earnings: 269333.33, finish: "T19" },
-      Zach:      { golfer: "Matt Fitzpatrick",  earnings: 99000,     finish: "T36" },
-    },
-  },
-  {
-    tournament: "RBC Canadian Open",
-    picks: {
-      Aaron:     { golfer: "Eric Cole",         earnings: 0,         finish: "CUT" },
-      Austin:    { golfer: "Sam Burns",         earnings: 96856.67,  finish: "T20" },
-      Cody:      { golfer: "Nick Taylor",       earnings: 21168,     finish: "T65" },
-      Jefferson: { golfer: "Nick Taylor",       earnings: 21168,     finish: "T65" },
-      Zach:      { golfer: "Aaron Rai",         earnings: 0,         finish: "CUT" },
-    },
-  },
-  {
-    tournament: "U.S. Open",
-    picks: {
-      Aaron:     { golfer: "Rory McIlroy",      earnings: 128756,    finish: "T32" },
-      Austin:    { golfer: "Wyndham Clark",     earnings: 4500000,   finish: "1st" },
-      Cody:      { golfer: "Scottie Scheffler", earnings: 920882,    finish: "T4" },
-      Jefferson: { golfer: "Patrick Reed",      earnings: 0,         finish: "CUT" },
-      Zach:      { golfer: "Rory McIlroy",      earnings: 128756,    finish: "T32" },
-    },
-  },
-  {
-    tournament: "Travelers Championship",
-    picks: {
-      Aaron:     { golfer: "Justin Thomas",     earnings: 310000,    finish: "T14" },
-      Austin:    { golfer: "Hideki Matsuyama",  earnings: 310000,    finish: "T14" },
-      Cody:      { golfer: "Keegan Bradley",    earnings: 310000,    finish: "T14" },
-      Jefferson: { golfer: "Patrick Cantlay",   earnings: 310000,    finish: "T14" },
-      Zach:      { golfer: "Brian Harman",      earnings: 154500,    finish: "T25" },
-    },
-  },
-  {
-    tournament: "John Deere Classic",
-    picks: {
-      Aaron:     { golfer: "Keith Mitchell",    earnings: 21358.86,  finish: "T51" },
-      Austin:    { golfer: "No Pick",           earnings: 0,         finish: "—" },
-      Cody:      { golfer: "Emiliano Grillo",   earnings: 66188.57,  finish: "T26" },
-      Jefferson: { golfer: "Tom Kim",           earnings: 26206.40,  finish: "T46" },
-      Zach:      { golfer: "Ben Griffin",       earnings: 100056,    finish: "T21" },
-    },
-  },
-  {
-    tournament: "Genesis Scottish Open",
-    picks: {
-      Aaron:     { golfer: "Robert MacIntyre",  earnings: 431887.50, finish: "T3" },
-      Austin:    { golfer: "Sahith Theegala",   earnings: 19710,     finish: "T66" },
-      Cody:      { golfer: "No Pick",           earnings: 0,         finish: "—" },
-      Jefferson: { golfer: "Jon Rahm",          earnings: 49978.13,  finish: "T36" },
-      Zach:      { golfer: "No Pick",           earnings: 0,         finish: "—" },
-    },
-  },
-  {
-    tournament: "The Open Championship",
-    picks: {
-      Aaron:     { golfer: "Matt Fitzpatrick",  earnings: 0,         finish: "CUT" },
-      Austin:    { golfer: "Jon Rahm",          earnings: 51707,     finish: "T46" },
-      Cody:      { golfer: "Matt Fitzpatrick",  earnings: 0,         finish: "CUT" },
-      Jefferson: { golfer: "Rory McIlroy",      earnings: 69750,     finish: "T40" },
-      Zach:      { golfer: "No Pick",           earnings: 0,         finish: "—" },
-    },
-  },
-  {
-    tournament: "3M Open",
-    picks: {
-      Aaron:     { golfer: "Tony Finau",        earnings: 0,         finish: "CUT" },
-      Austin:    { golfer: "Maverick McNealy",  earnings: 45848,     finish: "T34" },
-      Cody:      { golfer: "Jackson Koivun",    earnings: 1584000,   finish: "1st" },
-      Jefferson: { golfer: "Corey Conners",     earnings: 36520,     finish: "T39" },
-      Zach:      { golfer: "No Pick",           earnings: 0,         finish: "—" },
-    },
-  },
-  {
-    tournament: "Rocket Classic",
-    picks: {
-      Aaron:     { golfer: "Sudarshan Yellamaraju", earnings: 0,     finish: "CUT" },
-      Austin:    { golfer: "No Pick",           earnings: 0,         finish: "—" },
-      Cody:      { golfer: "Chris Gotterup",    earnings: 0,         finish: "CUT" },
-      Jefferson: { golfer: "Wyndham Clark",     earnings: 0,         finish: "CUT" },
-      Zach:      { golfer: "No Pick",           earnings: 0,         finish: "—" },
-    },
-  },
-  {
-    tournament: "Wyndham Championship",
-    picks: {
-      Aaron:     { golfer: "Joel Dahmen",       earnings: 31905.90,  finish: "T38" },
-      Austin:    { golfer: "No Pick",           earnings: 0,         finish: "—" },
-      Cody:      { golfer: "Aaron Rai",         earnings: 51047.22,  finish: "T29" },
-      Jefferson: { golfer: "Alex Smalley",      earnings: 249475,    finish: "T7" },
-      Zach:      { golfer: "No Pick",           earnings: 0,         finish: "—" },
-    },
-  },
+  { tournament: "Sony Open in Hawaii", picks: { Aaron: { golfer: "Si Woo Kim", earnings: 220675, finish: "T11" }, Austin: { golfer: "Nick Taylor", earnings: 163041.67, finish: "T13" }, Cody: { golfer: "Ben Griffin", earnings: 111839, finish: "T19" }, Jefferson: { golfer: "Chris Kirk", earnings: 0, finish: "CUT" }, Zach: { golfer: "Taylor Pendrith", earnings: 287105, finish: "T6" } } },
+  { tournament: "The American Express", picks: { Aaron: { golfer: "Daniel Berger", earnings: 20844, finish: "T56" }, Austin: { golfer: "Patrick Cantlay", earnings: 169740, finish: "T13" }, Cody: { golfer: "Sam Burns", earnings: 57918.18, finish: "T27" }, Jefferson: { golfer: "Harry Hall", earnings: 85100, finish: "T24" }, Zach: { golfer: "Davis Thompson", earnings: 0, finish: "CUT" } } },
+  { tournament: "Farmers Insurance Open", picks: { Aaron: { golfer: "Keegan Bradley", earnings: 31264, finish: "T43" }, Austin: { golfer: "Jason Day", earnings: 41760, finish: "T38" }, Cody: { golfer: "Ludvig Åberg", earnings: 0, finish: "CUT" }, Jefferson: { golfer: "J.J. Spaun", earnings: 0, finish: "CUT" }, Zach: { golfer: "Harris English", earnings: 92640, finish: "T22" } } },
+  { tournament: "WM Phoenix Open", picks: { Aaron: { golfer: "Maverick McNealy", earnings: 188000, finish: "T13" }, Austin: { golfer: "Rickie Fowler", earnings: 122720, finish: "T18" }, Cody: { golfer: "Sahith Theegala", earnings: 122720, finish: "T18" }, Jefferson: { golfer: "Hideki Matsuyama", earnings: 1046400, finish: "P2" }, Zach: { golfer: "Sam Burns", earnings: 0, finish: "CUT" } } },
+  { tournament: "AT&T Pebble Beach Pro-Am", picks: { Aaron: { golfer: "Justin Rose", earnings: 78375, finish: "T37" }, Austin: { golfer: "Rory McIlroy", earnings: 342750, finish: "T14" }, Cody: { golfer: "Taylor Pendrith", earnings: 104000, finish: "T34" }, Jefferson: { golfer: "Matt Fitzpatrick", earnings: 342750, finish: "T14" }, Zach: { golfer: "Tommy Fleetwood", earnings: 877500, finish: "T4" } } },
+  { tournament: "The Genesis Invitational", picks: { Aaron: { golfer: "Xander Schauffele", earnings: 603200, finish: "T7" }, Austin: { golfer: "Collin Morikawa", earnings: 603200, finish: "T7" }, Cody: { golfer: "Patrick Cantlay", earnings: 92250, finish: "T37" }, Jefferson: { golfer: "Tommy Fleetwood", earnings: 603200, finish: "T7" }, Zach: { golfer: "Patrick Cantlay", earnings: 92250, finish: "T37" } } },
+  { tournament: "Cognizant Classic", picks: { Aaron: { golfer: "Shane Lowry", earnings: 726400, finish: "T2" }, Austin: { golfer: "Ryan Gerard", earnings: 77600, finish: "T23" }, Cody: { golfer: "Shane Lowry", earnings: 726400, finish: "T2" }, Jefferson: { golfer: "Max McGreevy", earnings: 31776, finish: "T40" }, Zach: { golfer: "Daniel Berger", earnings: 54816, finish: "T32" } } },
+  { tournament: "Arnold Palmer Invitational", picks: { Aaron: { golfer: "Tommy Fleetwood", earnings: 56000, finish: "49th" }, Austin: { golfer: "Xander Schauffele", earnings: 157000, finish: "T24" }, Cody: { golfer: "Xander Schauffele", earnings: 157000, finish: "T24" }, Jefferson: { golfer: "Si Woo Kim", earnings: 373200, finish: "T13" }, Zach: { golfer: "Pierceson Coody", earnings: 0, finish: "CUT" } } },
+  { tournament: "THE PLAYERS Championship", picks: { Aaron: { golfer: "Russell Henley", earnings: 409027.78, finish: "T13" }, Austin: { golfer: "Ludvig Åberg", earnings: 925000, finish: "T5" }, Cody: { golfer: "Tommy Fleetwood", earnings: 731250, finish: "T8" }, Jefferson: { golfer: "Ludvig Åberg", earnings: 925000, finish: "T5" }, Zach: { golfer: "Si Woo Kim", earnings: 61083.33, finish: "T50" } } },
+  { tournament: "Valspar Championship", picks: { Aaron: { golfer: "Viktor Hovland", earnings: 0, finish: "CUT" }, Austin: { golfer: "Justin Thomas", earnings: 51142, finish: "T30" }, Cody: { golfer: "Brooks Koepka", earnings: 108290, finish: "T18" }, Jefferson: { golfer: "Jordan Spieth", earnings: 211575, finish: "T11" }, Zach: { golfer: "Jacob Bridgeman", earnings: 161525, finish: "T14" } } },
+  { tournament: "Texas Children's Houston Open", picks: { Aaron: { golfer: "Harris English", earnings: 96525, finish: "T21" }, Austin: { golfer: "Min Woo Lee", earnings: 584100, finish: "T3" }, Cody: { golfer: "Adam Scott", earnings: 96525, finish: "T21" }, Jefferson: { golfer: "Ryan Gerard", earnings: 0, finish: "CUT" }, Zach: { golfer: "Chris Gotterup", earnings: 322987, finish: "T6" } } },
+  { tournament: "Valero Texas Open", picks: { Aaron: { golfer: "Hideki Matsuyama", earnings: 95550, finish: "T21" }, Austin: { golfer: "Tommy Fleetwood", earnings: 237650, finish: "T10" }, Cody: { golfer: "Russell Henley", earnings: 0, finish: "CUT" }, Jefferson: { golfer: "Sepp Straka", earnings: 0, finish: "CUT" }, Zach: { golfer: "Russell Henley", earnings: 0, finish: "CUT" } } },
+  { tournament: "The Masters", picks: { Aaron: { golfer: "Scottie Scheffler", earnings: 2430000, finish: "2nd" }, Austin: { golfer: "Scottie Scheffler", earnings: 2430000, finish: "2nd" }, Cody: { golfer: "Justin Rose", earnings: 1080000, finish: "T3" }, Jefferson: { golfer: "Scottie Scheffler", earnings: 2430000, finish: "2nd" }, Zach: { golfer: "Jon Rahm", earnings: 101250, finish: "T38" } } },
+  { tournament: "RBC Heritage", picks: { Aaron: { golfer: "Sam Burns", earnings: 256694.44, finish: "T16" }, Austin: { golfer: "Matt Fitzpatrick", earnings: 3600000, finish: "1st" }, Cody: { golfer: "Si Woo Kim", earnings: 1360000, finish: "3rd" }, Jefferson: { golfer: "Russell Henley", earnings: 142750, finish: "T25" }, Zach: { golfer: "Xander Schauffele", earnings: 399250, finish: "T12" } } },
+  { tournament: "Cadillac Championship", picks: { Aaron: { golfer: "Cameron Young", earnings: 3600000, finish: "1st" }, Austin: { golfer: "Viktor Hovland", earnings: 72181.82, finish: "T38" }, Cody: { golfer: "Viktor Hovland", earnings: 72181.82, finish: "T38" }, Jefferson: { golfer: "Harris English", earnings: 44500, finish: "T55" }, Zach: { golfer: "Collin Morikawa", earnings: 41500, finish: "T62" } } },
+  { tournament: "Truist Championship", picks: { Aaron: { golfer: "Ludvig Åberg", earnings: 600000, finish: "T8" }, Austin: { golfer: "Cameron Young", earnings: 500000, finish: "T10" }, Cody: { golfer: "Rory McIlroy", earnings: 242100, finish: "T19" }, Jefferson: { golfer: "Xander Schauffele", earnings: 42500, finish: "T60" }, Zach: { golfer: "Adam Scott", earnings: 156643, finish: "T24" } } },
+  { tournament: "PGA Championship", picks: { Aaron: { golfer: "Chris Gotterup", earnings: 496707.50, finish: "T10" }, Austin: { golfer: "Brooks Koepka", earnings: 34186, finish: "T55" }, Cody: { golfer: "Jon Rahm", earnings: 1804000, finish: "T2" }, Jefferson: { golfer: "Cameron Young", earnings: 125523.33, finish: "T26" }, Zach: { golfer: "Scottie Scheffler", earnings: 364762.50, finish: "T14" } } },
+  { tournament: "AT&T Byron Nelson", picks: { Aaron: { golfer: "Brooks Koepka", earnings: 187975, finish: "T14" }, Austin: { golfer: "Jordan Spieth", earnings: 100596.67, finish: "T19" }, Cody: { golfer: "Jordan Spieth", earnings: 100596.67, finish: "T19" }, Jefferson: { golfer: "Ryo Hisatsune", earnings: 100596.67, finish: "T19" }, Zach: { golfer: "Jordan Spieth", earnings: 100596.67, finish: "T19" } } },
+  { tournament: "Charles Schwab Challenge", picks: { Aaron: { golfer: "Akshay Bhatia", earnings: 69300, finish: "T28" }, Austin: { golfer: "Russell Henley", earnings: 1782000, finish: "1st" }, Cody: { golfer: "Justin Thomas", earnings: 193875, finish: "T13" }, Jefferson: { golfer: "Rickie Fowler", earnings: 0, finish: "CUT" }, Zach: { golfer: "Justin Thomas", earnings: 193875, finish: "T13" } } },
+  { tournament: "The Memorial Tournament", picks: { Aaron: { golfer: "Ben Griffin", earnings: 0, finish: "CUT" }, Austin: { golfer: "Robert MacIntyre", earnings: 0, finish: "CUT" }, Cody: { golfer: "Cameron Young", earnings: 58666.67, finish: "T46" }, Jefferson: { golfer: "Justin Thomas", earnings: 269333.33, finish: "T19" }, Zach: { golfer: "Matt Fitzpatrick", earnings: 99000, finish: "T36" } } },
+  { tournament: "RBC Canadian Open", picks: { Aaron: { golfer: "Eric Cole", earnings: 0, finish: "CUT" }, Austin: { golfer: "Sam Burns", earnings: 96856.67, finish: "T20" }, Cody: { golfer: "Nick Taylor", earnings: 21168, finish: "T65" }, Jefferson: { golfer: "Nick Taylor", earnings: 21168, finish: "T65" }, Zach: { golfer: "Aaron Rai", earnings: 0, finish: "CUT" } } },
+  { tournament: "U.S. Open", picks: { Aaron: { golfer: "Rory McIlroy", earnings: 128756, finish: "T32" }, Austin: { golfer: "Wyndham Clark", earnings: 4500000, finish: "1st" }, Cody: { golfer: "Scottie Scheffler", earnings: 920882, finish: "T4" }, Jefferson: { golfer: "Patrick Reed", earnings: 0, finish: "CUT" }, Zach: { golfer: "Rory McIlroy", earnings: 128756, finish: "T32" } } },
+  { tournament: "Travelers Championship", picks: { Aaron: { golfer: "Justin Thomas", earnings: 310000, finish: "T14" }, Austin: { golfer: "Hideki Matsuyama", earnings: 310000, finish: "T14" }, Cody: { golfer: "Keegan Bradley", earnings: 310000, finish: "T14" }, Jefferson: { golfer: "Patrick Cantlay", earnings: 310000, finish: "T14" }, Zach: { golfer: "Brian Harman", earnings: 154500, finish: "T25" } } },
+  { tournament: "John Deere Classic", picks: { Aaron: { golfer: "Keith Mitchell", earnings: 21358.86, finish: "T51" }, Austin: { golfer: "No Pick", earnings: 0, finish: "—" }, Cody: { golfer: "Emiliano Grillo", earnings: 66188.57, finish: "T26" }, Jefferson: { golfer: "Tom Kim", earnings: 26206.40, finish: "T46" }, Zach: { golfer: "Ben Griffin", earnings: 100056, finish: "T21" } } },
+  { tournament: "Genesis Scottish Open", picks: { Aaron: { golfer: "Robert MacIntyre", earnings: 431887.50, finish: "T3" }, Austin: { golfer: "Sahith Theegala", earnings: 19710, finish: "T66" }, Cody: { golfer: "No Pick", earnings: 0, finish: "—" }, Jefferson: { golfer: "Jon Rahm", earnings: 49978.13, finish: "T36" }, Zach: { golfer: "No Pick", earnings: 0, finish: "—" } } },
+  { tournament: "The Open Championship", picks: { Aaron: { golfer: "Matt Fitzpatrick", earnings: 0, finish: "CUT" }, Austin: { golfer: "Jon Rahm", earnings: 51707, finish: "T46" }, Cody: { golfer: "Matt Fitzpatrick", earnings: 0, finish: "CUT" }, Jefferson: { golfer: "Rory McIlroy", earnings: 69750, finish: "T40" }, Zach: { golfer: "No Pick", earnings: 0, finish: "—" } } },
+  { tournament: "3M Open", picks: { Aaron: { golfer: "Tony Finau", earnings: 0, finish: "CUT" }, Austin: { golfer: "Maverick McNealy", earnings: 45848, finish: "T34" }, Cody: { golfer: "Jackson Koivun", earnings: 1584000, finish: "1st" }, Jefferson: { golfer: "Corey Conners", earnings: 36520, finish: "T39" }, Zach: { golfer: "No Pick", earnings: 0, finish: "—" } } },
+  { tournament: "Rocket Classic", picks: { Aaron: { golfer: "Sudarshan Yellamaraju", earnings: 0, finish: "CUT" }, Austin: { golfer: "No Pick", earnings: 0, finish: "—" }, Cody: { golfer: "Chris Gotterup", earnings: 0, finish: "CUT" }, Jefferson: { golfer: "Wyndham Clark", earnings: 0, finish: "CUT" }, Zach: { golfer: "No Pick", earnings: 0, finish: "—" } } },
+  { tournament: "Wyndham Championship", picks: { Aaron: { golfer: "Joel Dahmen", earnings: 31905.90, finish: "T38" }, Austin: { golfer: "No Pick", earnings: 0, finish: "—" }, Cody: { golfer: "Aaron Rai", earnings: 51047.22, finish: "T29" }, Jefferson: { golfer: "Alex Smalley", earnings: 249475, finish: "T7" }, Zach: { golfer: "No Pick", earnings: 0, finish: "—" } } },
+  { tournament: "FedEx St. Jude Championship", picks: { Aaron: { golfer: "Tom Kim", earnings: 369571.44, finish: "T12" }, Austin: { golfer: "Si Woo Kim", earnings: 2160000, finish: "2nd" }, Cody: { golfer: "Hideki Matsuyama", earnings: 582800, finish: "T7" }, Jefferson: { golfer: "Kurt Kitayama", earnings: 369571.44, finish: "T12" }, Zach: { golfer: "No Pick", earnings: 0, finish: "—" } } },
+  { tournament: "BMW Championship", picks: { Aaron: { golfer: "Wyndham Clark", earnings: 3600000, finish: "1st" }, Austin: { golfer: "Chris Gotterup", earnings: 856666.69, finish: "T4" }, Cody: { golfer: "Collin Morikawa", earnings: 856666.69, finish: "T4" }, Jefferson: { golfer: "Jake Knapp", earnings: 92000, finish: "T41" }, Zach: { golfer: "No Pick", earnings: 0, finish: "—" } } },
 ];
 
-// Current / upcoming tournament (set to null when no active event)
-const CURRENT_TOURNAMENT = null;
+// ============================================================
+// LIVE EVENT — Update this during the tournament weekend
+// Set to null when no event is active
+// ============================================================
+const LIVE_EVENT = null;
 
-// ============================================================
-// PLAYER COLORS
-// ============================================================
-const PCOLORS = {
-  Aaron: "#ffffff",
-  Austin: "#E8A87C",
-  Cody: "#7EC8E3",
-  Jefferson: "#F0D56C",
-  Zach: "#F08080",
-};
+const PCOLORS = { Aaron: "#ffffff", Austin: "#E8A87C", Cody: "#7EC8E3", Jefferson: "#F0D56C", Zach: "#F08080" };
 const pc = (n) => PCOLORS[n] || "#aaa";
-
-// ============================================================
-// HELPERS
-// ============================================================
 const fmt = (n) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: n % 1 !== 0 ? 2 : 0, maximumFractionDigits: 2 });
-const fmtShort = (n) => {
-  if (n >= 1000000) return "$" + (n / 1000000).toFixed(1) + "M";
-  if (n >= 1000) return "$" + (n / 1000).toFixed(0) + "K";
-  return "$" + n;
-};
+const fmtShort = (n) => { if (n >= 1000000) return "$" + (n / 1000000).toFixed(1) + "M"; if (n >= 1000) return "$" + (n / 1000).toFixed(0) + "K"; return "$" + n; };
+const fmtCompact = (n) => "$" + (n / 1000000).toFixed(2) + "M";
 
 function getStandings() {
   return PLAYERS.map(name => {
@@ -555,41 +233,69 @@ function getStandings() {
   }).sort((a, b) => b.total - a.total);
 }
 
-// ============================================================
-// RENDER
-// ============================================================
 const standings = getStandings();
 const leader = standings[0];
 const gap = leader.total - standings[1].total;
+const remainingEvents = 0;
 
-// Meta
 document.getElementById("meta").innerHTML =
-  `${TOURNAMENTS.length} of 36+ events<span class="dot">·</span>${PLAYERS.length} players<span class="dot">·</span>$100 buy-in`;
+  `${TOURNAMENTS.length} events completed<span class="dot">·</span>Season complete<span class="dot">·</span>${PLAYERS.length} players`;
 
-// Leader banner
 document.getElementById("leader-banner").innerHTML = `
-  <div>
-    <div class="label">Current Leader</div>
-    <div class="name">${leader.name}</div>
-  </div>
-  <div style="text-align:right">
-    <div class="amount">${fmt(leader.total)}</div>
-    <div class="gap">leads by ${fmt(gap)}</div>
-  </div>`;
+  <div><div class="label">Current Leader</div><div class="name">${leader.name}</div></div>
+  <div style="text-align:right"><div class="amount">${fmt(leader.total)}</div><div class="gap">leads by ${fmt(gap)}</div></div>`;
 
-// This week
 const twEl = document.getElementById("this-week");
-if (CURRENT_TOURNAMENT) {
-  const chips = PLAYERS.map(p => {
-    const c = pc(p);
-    const last = CURRENT_TOURNAMENT.picks[p]?.golfer?.split(" ").pop() || "?";
-    return `<span class="tw-chip" style="background:${c}18;color:${c};border:1px solid ${c}30">${p.slice(0,3)}: ${last}</span>`;
+twEl.style.display = "none";
+
+// ============================================================
+// LIVE TAB
+// ============================================================
+function renderLive() {
+  const el = document.getElementById("panel-live");
+  if (!LIVE_EVENT) {
+    el.innerHTML = '<div class="live-no-event">No active tournament this week.<br>Check back on Thursday.</div>';
+    return;
+  }
+  const e = LIVE_EVENT;
+  const picksHtml = PLAYERS.map(p => {
+    const pk = e.picks[p] || {};
+    const posClass = pk.position?.startsWith("T") && parseInt(pk.position.slice(1)) <= 10 ? "good" :
+                     pk.position === "CUT" || pk.position === "—" ? "bad" : "mid";
+    const posDisplay = pk.position && pk.score ? `${pk.position} · ${pk.score}` : pk.position || "—";
+    return `<div class="live-pick-row">
+      <div class="live-pick-dot" style="background:${pc(p)}${p==='Aaron'?';border:1px solid rgba(255,255,255,0.3)':''}"></div>
+      <div class="live-pick-name">${p}</div>
+      <div class="live-pick-golfer">${pk.golfer || "No Pick"}</div>
+      <div class="live-pick-pos ${posClass}">${posDisplay}</div>
+    </div>`;
   }).join("");
-  twEl.innerHTML = `
-    <div><div class="tw-label">This Week</div><div class="tw-name">${CURRENT_TOURNAMENT.tournament}</div></div>
-    <div class="tw-picks">${chips}</div>`;
-} else {
-  twEl.style.display = "none";
+
+  const projHtml = standings.map((s, i) => {
+    return `<div class="live-proj-row">
+      <div class="live-proj-rank">${i+1}</div>
+      <div class="live-proj-name">${s.name}</div>
+      <div class="live-proj-total">${fmtCompact(s.total)}</div>
+      <div class="live-proj-delta pos">—</div>
+    </div>`;
+  }).join("");
+
+  el.innerHTML = `
+    <div class="live-card">
+      <div class="live-header">
+        <div class="live-header-info">
+          <div class="live-tournament">${e.tournament}</div>
+          <div class="live-course">${e.course} · Purse ${e.purse}</div>
+        </div>
+        <div class="live-round-badge">${e.round}</div>
+      </div>
+      <div style="padding:10px 0 6px"><div class="live-section-label">Our picks</div>${picksHtml}</div>
+      <div style="padding:6px 0 10px;border-top:1px solid var(--border)"><div class="live-section-label" style="padding-top:8px">Season standings</div><div class="live-projected">${projHtml}</div></div>
+    </div>
+    <a href="${e.leaderboardUrl}" target="_blank" class="live-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      View full PGA Tour leaderboard
+    </a>`;
 }
 
 // ============================================================
@@ -598,17 +304,8 @@ if (CURRENT_TOURNAMENT) {
 function renderLeaderboard() {
   const medals = ["🥇","🥈","🥉"];
   const rows = standings.map((s, i) => {
-    const r = i + 1;
-    const rc = r === 1 ? "r1" : r <= 3 ? "r2" : "rn";
-    const label = medals[i] || r;
-    return `<div class="lb-row">
-      <div class="lb-rank ${rc}">${label}</div>
-      <div class="lb-info">
-        <div class="lb-name">${s.name}</div>
-        <div class="lb-sub">${s.count} tournament${s.count !== 1 ? "s" : ""}</div>
-      </div>
-      <div class="lb-total ${r === 1 ? "first" : ""}">${fmt(s.total)}</div>
-    </div>`;
+    const r = i + 1; const rc = r === 1 ? "r1" : r <= 3 ? "r2" : "rn"; const label = medals[i] || r;
+    return `<div class="lb-row"><div class="lb-rank ${rc}">${label}</div><div class="lb-info"><div class="lb-name">${s.name}</div><div class="lb-sub">${s.count} tournament${s.count !== 1 ? "s" : ""}</div></div><div class="lb-total ${r === 1 ? "first" : ""}">${fmt(s.total)}</div></div>`;
   }).join("");
   document.getElementById("panel-leaderboard").innerHTML = `<div class="leaderboard">${rows}</div>`;
 }
@@ -617,113 +314,35 @@ function renderLeaderboard() {
 // CHART
 // ============================================================
 function renderChart() {
-  const W = 640, H = 320, pL = 58, pR = 16, pT = 20, pB = 72;
+  const W = 640, H = 320, pL = 50, pR = 10, pT = 20, pB = 72;
   const cW = W - pL - pR, cH = H - pT - pB;
-
-  const cum = {};
-  PLAYERS.forEach(p => {
-    let r = 0; cum[p] = [0];
-    TOURNAMENTS.forEach(t => { r += t.picks[p]?.earnings || 0; cum[p].push(r); });
-  });
-
+  const cum = {}; PLAYERS.forEach(p => { let r = 0; cum[p] = [0]; TOURNAMENTS.forEach(t => { r += t.picks[p]?.earnings || 0; cum[p].push(r); }); });
   const mx = Math.ceil(Math.max(...Object.values(cum).flat()) / 500000) * 500000;
   const pts = TOURNAMENTS.length + 1;
   const gx = i => pL + (i / (pts - 1)) * cW;
   const gy = v => pT + cH - (v / mx) * cH;
   const gridCount = 5;
-
-  const abbrevs = {
-    "Sony Open in Hawaii": "Sony", "The American Express": "AmEx",
-    "Farmers Insurance Open": "Farmers", "WM Phoenix Open": "WMPO",
-    "AT&T Pebble Beach Pro-Am": "AT&T", "The Genesis Invitational": "Genesis",
-    "Cognizant Classic": "Cognizant", "Arnold Palmer Invitational": "API",
-    "THE PLAYERS Championship": "TPC", "Valspar Championship": "Valspar",
-    "Texas Children's Houston Open": "Houston",
-    "Valero Texas Open": "Valero",
-    "The Masters": "Masters",
-    "RBC Heritage": "RBC",
-    "Cadillac Championship": "Cadillac",
-    "Truist Championship": "Truist",
-    "PGA Championship": "PGA",
-    "AT&T Byron Nelson": "Nelson",
-    "Charles Schwab Challenge": "Schwab",
-    "The Memorial Tournament": "Memorial",
-    "RBC Canadian Open": "Canada",
-    "U.S. Open": "US Open",
-    "Travelers Championship": "Travelers",
-    "John Deere Classic": "Deere",
-    "Genesis Scottish Open": "Scottish",
-    "The Open Championship": "Open",
-    "3M Open": "3M",
-    "Rocket Classic": "Rocket",
-    "Wyndham Championship": "Wyndham",
-  };
-
+  const abbrevs = {"Sony Open in Hawaii":"Sony","The American Express":"AmEx","Farmers Insurance Open":"Farmers","WM Phoenix Open":"WMPO","AT&T Pebble Beach Pro-Am":"AT&T","The Genesis Invitational":"Genesis","Cognizant Classic":"Cog","Arnold Palmer Invitational":"API","THE PLAYERS Championship":"TPC","Valspar Championship":"Val","Texas Children's Houston Open":"Hou","Valero Texas Open":"Valero","The Masters":"Masters","RBC Heritage":"RBC","Cadillac Championship":"Cad","Truist Championship":"Truist","PGA Championship":"PGA","AT&T Byron Nelson":"Nelson","Charles Schwab Challenge":"Schwab","The Memorial Tournament":"Mem","RBC Canadian Open":"Canada","U.S. Open":"US Open","Travelers Championship":"Trav","John Deere Classic":"Deere","Genesis Scottish Open":"Scot","The Open Championship":"Open","3M Open":"3M","Rocket Classic":"Rocket","Wyndham Championship":"Wynd","FedEx St. Jude Championship":"FedEx","BMW Championship":"BMW"};
   const sorted = [...PLAYERS].sort((a, b) => cum[b][cum[b].length - 1] - cum[a][cum[a].length - 1]);
-
-  // Grid
   let svg = `<svg viewBox="0 0 ${W} ${H}" class="chart-svg" xmlns="http://www.w3.org/2000/svg">`;
-  for (let i = 0; i <= gridCount; i++) {
-    const v = (mx / gridCount) * i;
-    svg += `<line x1="${pL}" y1="${gy(v)}" x2="${W-pR}" y2="${gy(v)}" stroke="rgba(255,255,255,0.06)"/>`;
-    svg += `<text x="${pL-8}" y="${gy(v)+4}" text-anchor="end" fill="rgba(255,255,255,0.25)" font-size="10" font-family="'DM Mono',monospace">${fmtShort(v)}</text>`;
-  }
-
-  // X labels
-  svg += `<text x="${gx(0)}" y="${H-pB+16}" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="9" font-family="'DM Sans'">Start</text>`;
-  TOURNAMENTS.forEach((t, i) => {
-    const x = gx(i + 1), y = H - pB + 16;
-    const label = abbrevs[t.tournament] || t.tournament.slice(0, 10);
-    svg += `<text x="${x}" y="${y}" text-anchor="middle" fill="rgba(255,255,255,0.28)" font-size="9" font-family="'DM Sans'" transform="rotate(-20,${x},${y})">${label}</text>`;
-  });
-
-  // Lines and dots
-  sorted.forEach(p => {
-    const d = cum[p].map((v, i) => `${i ? "L" : "M"}${gx(i)},${gy(v)}`).join(" ");
-    svg += `<path data-player="${p}" d="${d}" fill="none" stroke="${pc(p)}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85" style="transition:opacity 0.2s,stroke-width 0.2s"/>`;
-    cum[p].forEach((v, i) => {
-      svg += `<circle data-player="${p}" cx="${gx(i)}" cy="${gy(v)}" r="3" fill="${pc(p)}" opacity="0.9" style="transition:opacity 0.2s,r 0.2s"/>`;
-    });
-  });
+  for (let i = 0; i <= gridCount; i++) { const v = (mx / gridCount) * i; svg += `<line x1="${pL}" y1="${gy(v)}" x2="${W-pR}" y2="${gy(v)}" stroke="rgba(255,255,255,0.06)"/><text x="${pL-6}" y="${gy(v)+4}" text-anchor="end" fill="rgba(255,255,255,0.25)" font-size="9" font-family="'DM Mono',monospace">${fmtShort(v)}</text>`; }
+  svg += `<text x="${gx(0)}" y="${H-pB+14}" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="7" font-family="'DM Sans'">Start</text>`;
+  TOURNAMENTS.forEach((t, i) => { const x = gx(i + 1), y = H - pB + 14; const label = abbrevs[t.tournament] || t.tournament.slice(0, 6); svg += `<text x="${x}" y="${y}" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="6" font-family="'DM Sans'" transform="rotate(-35,${x},${y})">${label}</text>`; });
+  sorted.forEach(p => { const d = cum[p].map((v, i) => `${i ? "L" : "M"}${gx(i)},${gy(v)}`).join(" "); svg += `<path data-player="${p}" d="${d}" fill="none" stroke="${pc(p)}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.85" style="transition:opacity 0.2s,stroke-width 0.2s"/>`; cum[p].forEach((v, i) => { svg += `<circle data-player="${p}" cx="${gx(i)}" cy="${gy(v)}" r="2.5" fill="${pc(p)}" opacity="0.9" style="transition:opacity 0.2s"/>`;  }); });
   svg += `</svg>`;
-
-  // Legend
-  const legend = sorted.map(p =>
-    `<div class="legend-item" data-legend="${p}"><div class="legend-swatch" style="background:${pc(p)}"></div>${p}</div>`
-  ).join("");
-
-  document.getElementById("panel-chart").innerHTML = `
-    <div class="chart-container">
-      <div class="chart-title">Cumulative Earnings</div>
-      ${svg}
-      <div class="chart-legend">${legend}</div>
-    </div>`;
-
-  // Hover interactivity
+  const legend = sorted.map(p => `<div class="legend-item" data-legend="${p}"><div class="legend-swatch" style="background:${pc(p)}"></div>${p}</div>`).join("");
+  document.getElementById("panel-chart").innerHTML = `<div class="chart-container"><div class="chart-title">Cumulative Earnings</div>${svg}<div class="chart-legend">${legend}</div></div>`;
   document.querySelectorAll(".legend-item").forEach(el => {
-    el.addEventListener("mouseenter", () => {
+    const handler = (isEnter) => () => {
       const p = el.dataset.legend;
       document.querySelectorAll("[data-player]").forEach(node => {
-        if (node.dataset.player === p) {
-          node.setAttribute("opacity", "1");
-          if (node.tagName === "path") node.setAttribute("stroke-width", "3.5");
-          if (node.tagName === "circle") node.setAttribute("r", "4.5");
-        } else {
-          node.setAttribute("opacity", "0.15");
-        }
+        if (isEnter) { node.setAttribute("opacity", node.dataset.player === p ? "1" : "0.15"); if (node.tagName === "path") node.setAttribute("stroke-width", node.dataset.player === p ? "3.5" : "2"); }
+        else { node.setAttribute("opacity", node.tagName === "path" ? "0.85" : "0.9"); if (node.tagName === "path") node.setAttribute("stroke-width", "2"); }
       });
-      document.querySelectorAll(".legend-item").forEach(l => {
-        l.classList.toggle("highlighted", l.dataset.legend === p);
-      });
-    });
-    el.addEventListener("mouseleave", () => {
-      document.querySelectorAll("[data-player]").forEach(node => {
-        node.setAttribute("opacity", node.tagName === "path" ? "0.85" : "0.9");
-        if (node.tagName === "path") node.setAttribute("stroke-width", "2");
-        if (node.tagName === "circle") node.setAttribute("r", "3");
-      });
-      document.querySelectorAll(".legend-item").forEach(l => l.classList.remove("highlighted"));
-    });
+      document.querySelectorAll(".legend-item").forEach(l => { l.classList.toggle("highlighted", isEnter && l.dataset.legend === p); });
+    };
+    el.addEventListener("mouseenter", handler(true)); el.addEventListener("mouseleave", handler(false));
+    el.addEventListener("touchstart", handler(true), {passive:true}); el.addEventListener("touchend", handler(false), {passive:true});
   });
 }
 
@@ -732,52 +351,15 @@ function renderChart() {
 // ============================================================
 function renderHistory() {
   let html = "";
-
-  // Current tournament
-  if (CURRENT_TOURNAMENT) {
-    const rows = PLAYERS.map(p => {
-      const pk = CURRENT_TOURNAMENT.picks[p] || {};
-      return `<div class="pick-row">
-        <div class="pick-dot" style="background:${pc(p)};opacity:0.45"></div>
-        <div class="pick-detail"><span class="pname">${p}</span><span class="arrow">→</span>${pk.golfer || "No Pick"}</div>
-      </div>`;
-    }).join("");
-    html += `<div class="pick-card pending">
-      <div class="pick-card-header">
-        <div><div class="pick-card-title">${CURRENT_TOURNAMENT.tournament}</div><div class="pick-card-week">In Progress</div></div>
-        <div class="live-badge">Live</div>
-      </div>
-      <div style="padding:6px 0">${rows}</div>
-    </div>`;
-  }
-
-  // Past tournaments (newest first)
   [...TOURNAMENTS].reverse().forEach((t, i) => {
     const week = TOURNAMENTS.length - i;
-    const sorted = PLAYERS.map(p => ({
-      name: p, golfer: t.picks[p]?.golfer || "No Pick",
-      earnings: t.picks[p]?.earnings || 0, finish: t.picks[p]?.finish || "—",
-    })).sort((a, b) => b.earnings - a.earnings);
-
+    const sorted = PLAYERS.map(p => ({ name: p, golfer: t.picks[p]?.golfer || "No Pick", earnings: t.picks[p]?.earnings || 0, finish: t.picks[p]?.finish || "—" })).sort((a, b) => b.earnings - a.earnings);
     const rows = sorted.map((pk, j) => {
       const isCut = pk.finish === "CUT";
-      return `<div class="pick-row">
-        <div class="pick-dot" style="background:${pc(pk.name)};opacity:${j === 0 ? 1 : 0.45}"></div>
-        <div class="pick-detail"><span class="pname">${pk.name}</span><span class="arrow">→</span>${pk.golfer}</div>
-        <div class="pick-finish ${isCut ? "cut" : ""}">${pk.finish}</div>
-        <div class="pick-earnings ${pk.earnings > 0 ? "pos" : "zero"}">${pk.earnings > 0 ? fmt(pk.earnings) : "—"}</div>
-      </div>`;
+      return `<div class="pick-row"><div class="pick-dot" style="background:${pc(pk.name)};opacity:${j === 0 ? 1 : 0.45}"></div><div class="pick-detail"><span class="pname">${pk.name}</span><span class="arrow">→</span>${pk.golfer}</div><div class="pick-finish ${isCut ? "cut" : ""}">${pk.finish}</div><div class="pick-earnings ${pk.earnings > 0 ? "pos" : "zero"}">${pk.earnings > 0 ? fmt(pk.earnings) : "—"}</div></div>`;
     }).join("");
-
-    html += `<div class="pick-card">
-      <div class="pick-card-header">
-        <div><div class="pick-card-title">${t.tournament}</div><div class="pick-card-week">Week ${week}</div></div>
-        <div class="pick-card-best">Best: ${sorted[0].name}</div>
-      </div>
-      <div style="padding:6px 0">${rows}</div>
-    </div>`;
+    html += `<div class="pick-card"><div class="pick-card-header"><div><div class="pick-card-title">${t.tournament}</div><div class="pick-card-week">Week ${week}</div></div><div class="pick-card-best">Best: ${sorted[0].name}</div></div><div style="padding:4px 0">${rows}</div></div>`;
   });
-
   document.getElementById("panel-history").innerHTML = `<div class="pick-cards">${html}</div>`;
 }
 
@@ -787,19 +369,9 @@ function renderHistory() {
 function renderBurned() {
   const html = standings.map(s => {
     const golfers = TOURNAMENTS.map(t => t.picks[s.name]).filter(Boolean).map(p => p.golfer);
-    const currentPick = CURRENT_TOURNAMENT?.picks[s.name]?.golfer;
-    if (currentPick) golfers.push(currentPick);
-    const unique = [...new Set(golfers)];
-
+    const unique = [...new Set(golfers)].filter(g => g !== "No Pick");
     const chips = unique.map(g => `<span class="used-chip">${g}</span>`).join("");
-    return `<div class="used-card">
-      <div class="used-header">
-        <div class="used-dot" style="background:${pc(s.name)}"></div>
-        <div class="used-name">${s.name}</div>
-        <div class="used-count">${unique.length} golfer${unique.length !== 1 ? "s" : ""} used</div>
-      </div>
-      <div class="used-chips">${chips}</div>
-    </div>`;
+    return `<div class="used-card"><div class="used-header"><div class="used-dot" style="background:${pc(s.name)}"></div><div class="used-name">${s.name}</div><div class="used-count">${unique.length} used</div></div><div class="used-chips">${chips}</div></div>`;
   }).join("");
   document.getElementById("panel-burned").innerHTML = `<div class="used-cards">${html}</div>`;
 }
@@ -819,6 +391,7 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
 // ============================================================
 // INIT
 // ============================================================
+renderLive();
 renderLeaderboard();
 renderChart();
 renderHistory();
